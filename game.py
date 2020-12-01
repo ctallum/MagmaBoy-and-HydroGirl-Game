@@ -11,4 +11,4 @@ class Game:
 # Def game_over
 # Def pushes (in-game buttons)
 # Def gems
-
+    pass
