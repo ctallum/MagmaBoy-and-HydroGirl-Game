@@ -16,3 +16,6 @@ class Players:
     # init
         # Sprite
         # Type (Water)
+
+
+#wowowow very cool
