@@ -42,7 +42,6 @@ def main():
     with open("data/level0.txt") as f:
         for line in f:
             line = line.strip().split(',')  # convert string to list of str
-            line = [int(chunk) for chunk in line]  # convert all str to in
             game_map.append(line)
 
     moving_right = False
@@ -56,42 +55,37 @@ def main():
     # main game loop
     while True:
 
-        tile_rects = []
-        y = 0
-        for row in game_map:
-            x = 0
-            for tile in row:
-                if tile == 0:
+        solid_blocks = []
+        for y, row in enumerate(game_map):
+            for x, tile in enumerate(row):
+                if tile == '0':
                     display.blit(wall_image, (x*16, y*16))
-                if tile == 100:
+                if tile == '100':
                     display.blit(floor_100, (x*16, y*16))
-                if tile == 111:
+                if tile == '111':
                     display.blit(floor_111, (x*16, y*16))
-                if tile == 112:
+                if tile == '112':
                     display.blit(floor_112, (x*16, y*16))
-                if tile == 113:
+                if tile == '113':
                     display.blit(floor_113, (x*16, y*16))
-                if tile == 114:
+                if tile == '114':
                     display.blit(floor_114, (x*16, y*16))
-                if tile == 121:
+                if tile == '121':
                     display.blit(floor_121, (x*16, y*16))
-                if tile == 122:
+                if tile == '122':
                     display.blit(floor_122, (x*16, y*16))
-                if tile == 123:
+                if tile == '123':
                     display.blit(floor_123, (x*16, y*16))
-                if tile == 124:
+                if tile == '124':
                     display.blit(floor_124, (x*16, y*16))
-                if tile == 2:
+                if tile == '2':
                     display.blit(lava_image, (x*16, y*16))
-                if tile == 3:
+                if tile == '3':
                     display.blit(water_image, (x*16, y*16))
-                if tile == 4:
+                if tile == '4':
                     display.blit(goo_image, (x*16, y*16))
-                if tile not in [0, 2, 3, 4]:
-                    tile_rects.append(pygame.Rect(x*16, y*16, 16, 16))
-                x += 1
-            y += 1
-
+                if tile not in ['0', '2', '3', '4']:
+                    solid_blocks.append(pygame.Rect(x*16, y*16, 16, 16))
                 
         player_movement = [0, 0]
         if moving_right:
@@ -103,7 +97,7 @@ def main():
         if player_y_momentum > 3:
             player_y_momentum = 3
         
-        player_rect, collisions = move(player_rect, player_movement, tile_rects)
+        player_rect, collisions = move(player_rect, player_movement, solid_blocks)
         
         if collisions['bottom']:
             player_y_momentum = 0
