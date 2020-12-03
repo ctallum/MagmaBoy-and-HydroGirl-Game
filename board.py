@@ -121,6 +121,7 @@ class Board:
         refresh the game screen
         """
         new_window_size, center_cords = self.adjust_scale()
+        # scale internal display to match window
         game_disp = pygame.transform.scale(self.display, new_window_size)
         self.screen.blit(game_disp, center_cords)
         pygame.display.update()
@@ -142,10 +143,13 @@ class Board:
         """
         window_size = self.screen.get_size()
 
-        if window_size[0]/window_size[1]>= 1.5:
+        # if window is longer than aspect ratio
+        if window_size[0]/window_size[1] >= 1.5:
             display_size = (int(1.5 * window_size[1]), window_size[1])
+        # if window is taller than aspect ratio
         else:
             display_size = (window_size[0], int(.75 * window_size[0]))
+        # find cords so that display is centered
         cords = ((window_size[0] - display_size[0])/2, (window_size[1] - display_size[1])/2)
 
         return display_size, cords
