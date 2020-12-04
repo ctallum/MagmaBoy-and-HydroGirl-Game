@@ -1,4 +1,4 @@
-class Players:
+class Character:
     pass
 # Class Character
     # Init
@@ -8,6 +8,8 @@ class Players:
         # Sprite
         # Dead or alive
         # Type (water/fire)
+
+
 # Class Magmaboy(Character)
     # Init
         # Sprite
