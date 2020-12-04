@@ -48,7 +48,7 @@ class Board:
         Save textures in a dictionary.
         """
         self.board_image = {
-            "wall": pygame.image.load('data/board_textures/0.png'),
+            "wall": pygame.image.load('data/board_textures/wall.png'),
             "floor_100": pygame.image.load('data/board_textures/100.png'),
             "floor_100": pygame.image.load('data/board_textures/100.png'),
             "floor_111": pygame.image.load('data/board_textures/111.png'),
@@ -59,10 +59,12 @@ class Board:
             "floor_122": pygame.image.load('data/board_textures/122.png'),
             "floor_123": pygame.image.load('data/board_textures/123.png'),
             "floor_124": pygame.image.load('data/board_textures/124.png'),
-            "lava_image": pygame.image.load('data/board_textures/2.png'),
-            "water_image": pygame.image.load('data/board_textures/3.png'),
-            "goo_image": pygame.image.load('data/board_textures/4.png')
+            "lava_image": pygame.image.load('data/board_textures/lava.png'),
+            "water_image": pygame.image.load('data/board_textures/puddle.png'),
+            "goo_image": pygame.image.load('data/board_textures/goo.png')
         }
+        for texture in self.board_image.keys():
+            self.board_image[texture].set_colorkey((255, 0, 255))
 
     def draw_board(self):
         """
@@ -70,11 +72,12 @@ class Board:
 
         Iterate through the game map draw each chunk.
         """
+        # draw the full background
+        self.display.blit(self.board_image["wall"], (0, 0))
+
+        # draw the solid blocks and liquids
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
-                if tile == '0':
-                    self.display.blit(
-                        self.board_image["wall"], (x * 16, y * 16))
                 if tile == '100':
                     self.display.blit(
                         self.board_image["floor_100"], (x * 16, y * 16))
