@@ -26,7 +26,7 @@ class Board:
         '''
         Create an array which contains the type of every chunk on the map.
 
-        Each level map is made up of 24x32 chunks. Each type of chunk has 
+        Each level map is made up of 24x32 chunks. Each type of chunk has
         specfic texture and properties. Each unique chunks type has a
         unique string value.
 
@@ -73,32 +73,45 @@ class Board:
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
                 if tile == '0':
-                    self.display.blit(self.board_image["wall"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["wall"], (x * 16, y * 16))
                 if tile == '100':
-                    self.display.blit(self.board_image["floor_100"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_100"], (x * 16, y * 16))
                 if tile == '111':
-                    self.display.blit(self.board_image["floor_111"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_111"], (x * 16, y * 16))
                 if tile == '112':
-                    self.display.blit(self.board_image["floor_112"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_112"], (x * 16, y * 16))
                 if tile == '113':
-                    self.display.blit(self.board_image["floor_113"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_113"], (x * 16, y * 16))
                 if tile == '114':
-                    self.display.blit(self.board_image["floor_114"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_114"], (x * 16, y * 16))
                 if tile == '121':
-                    self.display.blit(self.board_image["floor_121"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_121"], (x * 16, y * 16))
                 if tile == '122':
-                    self.display.blit(self.board_image["floor_122"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_122"], (x * 16, y * 16))
                 if tile == '123':
-                    self.display.blit(self.board_image["floor_123"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_123"], (x * 16, y * 16))
                 if tile == '124':
-                    self.display.blit(self.board_image["floor_124"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["floor_124"], (x * 16, y * 16))
                 if tile == '2':
-                    self.display.blit(self.board_image["lava_image"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["lava_image"], (x * 16, y * 16))
                 if tile == '3':
-                    self.display.blit(self.board_image["water_image"], (x*16, y*16))
+                    self.display.blit(
+                        self.board_image["water_image"], (x * 16, y * 16))
                 if tile == '4':
-                    self.display.blit(self.board_image["goo_image"], (x*16, y*16))
-        
+                    self.display.blit(
+                        self.board_image["goo_image"], (x * 16, y * 16))
+
     def make_solid_blocks(self):
         """
         Iterate through the map and make the walls and ground solid blocks
@@ -108,7 +121,8 @@ class Board:
         for y, row in enumerate(self.game_map):
             for x, tile in enumerate(row):
                 if tile not in ['0', '2', '3', '4']:
-                    self.solid_blocks.append(pygame.Rect(x*16, y*16, 16, 16))
+                    self.solid_blocks.append(
+                        pygame.Rect(x * 16, y * 16, 16, 16))
 
     def get_solid_blocks(self):
         """
@@ -144,12 +158,13 @@ class Board:
         window_size = self.screen.get_size()
 
         # if window is longer than aspect ratio
-        if window_size[0]/window_size[1] >= 1.5:
+        if window_size[0] / window_size[1] >= 1.5:
             display_size = (int(1.5 * window_size[1]), window_size[1])
         # if window is taller than aspect ratio
         else:
             display_size = (window_size[0], int(.75 * window_size[0]))
         # find cords so that display is centered
-        cords = ((window_size[0] - display_size[0])/2, (window_size[1] - display_size[1])/2)
+        cords = ((window_size[0] - display_size[0]) / 2,
+                 (window_size[1] - display_size[1]) / 2)
 
         return display_size, cords

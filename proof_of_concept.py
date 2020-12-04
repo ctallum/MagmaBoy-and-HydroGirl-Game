@@ -96,7 +96,7 @@ def main():
         player_y_momentum += 0.2
         if player_y_momentum > 3:
             player_y_momentum = 3
-        
+
         player_rect, collisions = move(player_rect, player_movement, solid_blocks)
         
         if collisions['bottom']:

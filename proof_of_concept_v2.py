@@ -10,6 +10,7 @@ from pygame.locals import *
 # import classes
 from board import Board
 
+
 def main():
     # inialize the game
     clock = pygame.time.Clock()
@@ -17,25 +18,26 @@ def main():
 
     # initialize board
     board = Board()
-    level = "data/level0.txt" # we can change level design by changing txt file
+    level = "data/level0.txt"  # we can change level design by changing txt file
     board.load_map(level)
     board.load_images()
     board.make_solid_blocks()
 
     # initialize player
     player_image = pygame.image.load('data/player_images/player.png').convert()
-    player_image.set_colorkey((255, 255, 255)) 
+    player_image.set_colorkey((255, 255, 255))
     moving_right = False
     moving_left = False
     player_y_momentum = 0
     air_timer = 0
-    player_rect = pygame.Rect(0,300, player_image.get_width(), player_image.get_height())
+    player_rect = pygame.Rect(0, 300, player_image.get_width(),
+                              player_image.get_height())
 
     # main game loop
     while True:
-        # draw board 
+        # draw board
         board.draw_board()
-                
+
         player_movement = [0, 0]
         if moving_right:
             player_movement[0] += 2.5
@@ -45,15 +47,16 @@ def main():
         player_y_momentum += 0.2
         if player_y_momentum > 3:
             player_y_momentum = 3
-        
-        player_rect, collisions = move(player_rect, player_movement, board.get_solid_blocks())
-        
+
+        player_rect, collisions = move(player_rect, player_movement,
+                                       board.get_solid_blocks())
+
         if collisions['bottom']:
             player_y_momentum = 0
             air_timer = 0
         else:
             air_timer += 1
-        
+
         if collisions['top']:
             player_y_momentum = 0
 
@@ -84,6 +87,7 @@ def main():
         # run game at rate of 60 fps
         clock.tick(60)
 
+
 def collision_test(rect, tiles):
     hit_list = []
     for tile in tiles:
@@ -91,8 +95,13 @@ def collision_test(rect, tiles):
             hit_list.append(tile)
     return hit_list
 
+
 def move(rect, movement, tiles):
-    collision_types = {'top': False, 'bottom': False, 'right': False, 'left': False}
+    collision_types = {
+        'top': False,
+        'bottom': False,
+        'right': False,
+        'left': False}
     rect.x += movement[0]
     hit_list = collision_test(rect, tiles)
     for tile in hit_list:
@@ -112,6 +121,7 @@ def move(rect, movement, tiles):
             rect.top = tile.bottom
             collision_types['top'] = True
     return rect, collision_types
+
 
 if __name__ == '__main__':
     main()
