@@ -15,21 +15,18 @@ from controller import MagmaBoyController, HydroGirlController
 
 
 def main():
-    # inialize the game
+    # inialize pygame
     pygame.init()
     clock = pygame.time.Clock()
     
-    # initialize game
+    # initialize all classes used in game
     game = Game()
-
-    # initialize board
+    
     board = Level_1()
 
-    # initialize player
     hydro_girl = HydroGirl()
     magma_boy = MagmaBoy()
 
-    # intialize controllers
     magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
