@@ -11,11 +11,6 @@ class Board:
         The internal display is a smaller resolution than the window display.
         The internal display is scaled up to match the larger window display.
         """
-        # create pygame window
-        SCALE = 20
-        WINDOW_SIZE = (32 * SCALE, 24 * SCALE)  # final window size
-        self.screen = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
-        pygame.display.set_caption("Magma Boy and Hydro Girl")
 
         # create internal game display
         CHUNK_SIZE = 16
@@ -66,7 +61,7 @@ class Board:
         for texture in self.board_image.keys():
             self.board_image[texture].set_colorkey((255, 0, 255))
 
-    def draw_board(self):
+    def construct_board(self):
         """
         Draw the board.
 
@@ -133,41 +128,8 @@ class Board:
         """
         return self.solid_blocks
 
-    def refresh(self):
+    def get_board(self):
         """
-        refresh the game screen
+        Return the pygame internal display.
         """
-        new_window_size, center_cords = self.adjust_scale()
-        # scale internal display to match window
-        game_disp = pygame.transform.scale(self.display, new_window_size)
-        self.screen.blit(game_disp, center_cords)
-        pygame.display.update()
-
-    def adjust_scale(self):
-        """
-        Adjust internal screen for window scaling
-
-        If the window size is changed, scale the game to the maximum amount
-        while keeping the same aspect ratio. Also keep the game centered in the
-        window.
-
-        Returns:
-            display_size::tuple (height, width)
-                The updated height and width of the internal game display
-            cords::tuple (x_cord, y_cord)
-                The cordinates of the upper left corner of the internal game
-                display so that when it is blit onto window, it is centered.
-        """
-        window_size = self.screen.get_size()
-
-        # if window is longer than aspect ratio
-        if window_size[0] / window_size[1] >= 1.5:
-            display_size = (int(1.5 * window_size[1]), window_size[1])
-        # if window is taller than aspect ratio
-        else:
-            display_size = (window_size[0], int(.75 * window_size[0]))
-        # find cords so that display is centered
-        cords = ((window_size[0] - display_size[0]) / 2,
-                 (window_size[1] - display_size[1]) / 2)
-
-        return display_size, cords
+        return self.display

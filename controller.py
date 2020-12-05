@@ -1,18 +1,48 @@
+import sys
+import pygame
+from pygame.locals import *
+
 class Controller:
-    pass
-# Class Controller
-    # Def restart
-    # Def help
-# Def get_controls
+    def __init__(self, player):
+        pass
+        self.player = player
 
-# Class MagmaBoyController (Controller)
-    # Init
-        # Keyboard controls (WASD)
-    # Def get_user_input
+    def get_user_input(self):
+         for event in pygame.event.get():
+            # if player closes the window
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == self.controls["right"]:
+                    self.player.moving_right = True
+                if event.key == self.controls["left"]:
+                    self.player.moving_left = True
+                if event.key == self.controls["up"]:
+                    if self.player.air_timer < 6:
+                        self.player.y_velocity = -5.5
+            if event.type == KEYUP:
+                if event.key == self.controls["right"]:
+                    self.player.moving_right = False
+                if event.key == self.controls["left"]:
+                    self.player.moving_left = False
+    
+class MagmaBoyController(Controller):
+    def __init__(self, player):
+        super().__init__(player)
+        self.controls = {
+            "left": K_a,
+            "right": K_d,
+            "up": K_w
+        }
 
-# Class HydroGirlController
-    # Init
-        # Keyboard controls (arrow keys)
-    # Def get_user_input
+class HydroGirlController(Controller):
+    def __init__(self, player):
+        super().__init__(player)
+        self.controls = {
+            "left": K_LEFT,
+            "right": K_RIGHT,
+            "up": K_UP
+        }
 
 

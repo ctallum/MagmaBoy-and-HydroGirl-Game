@@ -34,6 +34,7 @@ class MagmaBoy(Character):
     def __init__(self):
         super().__init__()
         self.type = 'fire'
+        self.controls = "wasd"
 
 
 class HydroGirl(Character):
@@ -42,3 +43,4 @@ class HydroGirl(Character):
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
         self.image.set_colorkey((255, 0, 255))
         self.type = 'water'
+        self.controls = "arrows"
