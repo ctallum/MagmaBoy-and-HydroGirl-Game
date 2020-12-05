@@ -12,11 +12,6 @@ class Board:
         The internal display is scaled up to match the larger window display.
         """
 
-        # create internal game display
-        CHUNK_SIZE = 16
-        DISPLAY_SIZE = (32 * CHUNK_SIZE, 24 * CHUNK_SIZE)
-        self.display = pygame.Surface(DISPLAY_SIZE)
-
     def load_map(self, path):
         '''
         Create an array which contains the type of every chunk on the map.
@@ -61,54 +56,6 @@ class Board:
         for texture in self.board_image.keys():
             self.board_image[texture].set_colorkey((255, 0, 255))
 
-    def construct_board(self):
-        """
-        Draw the board.
-
-        Iterate through the game map draw each chunk.
-        """
-        # draw the full background
-        self.display.blit(self.board_image["wall"], (0, 0))
-
-        # draw the solid blocks and liquids
-        for y, row in enumerate(self.game_map):
-            for x, tile in enumerate(row):
-                if tile == '100':
-                    self.display.blit(
-                        self.board_image["floor_100"], (x * 16, y * 16))
-                if tile == '111':
-                    self.display.blit(
-                        self.board_image["floor_111"], (x * 16, y * 16))
-                if tile == '112':
-                    self.display.blit(
-                        self.board_image["floor_112"], (x * 16, y * 16))
-                if tile == '113':
-                    self.display.blit(
-                        self.board_image["floor_113"], (x * 16, y * 16))
-                if tile == '114':
-                    self.display.blit(
-                        self.board_image["floor_114"], (x * 16, y * 16))
-                if tile == '121':
-                    self.display.blit(
-                        self.board_image["floor_121"], (x * 16, y * 16))
-                if tile == '122':
-                    self.display.blit(
-                        self.board_image["floor_122"], (x * 16, y * 16))
-                if tile == '123':
-                    self.display.blit(
-                        self.board_image["floor_123"], (x * 16, y * 16))
-                if tile == '124':
-                    self.display.blit(
-                        self.board_image["floor_124"], (x * 16, y * 16))
-                if tile == '2':
-                    self.display.blit(
-                        self.board_image["lava_image"], (x * 16, y * 16))
-                if tile == '3':
-                    self.display.blit(
-                        self.board_image["water_image"], (x * 16, y * 16))
-                if tile == '4':
-                    self.display.blit(
-                        self.board_image["goo_image"], (x * 16, y * 16))
 
     def make_solid_blocks(self):
         """
@@ -128,8 +75,12 @@ class Board:
         """
         return self.solid_blocks
 
-    def get_board(self):
-        """
-        Return the pygame internal display.
-        """
-        return self.display
+class Level_1(Board):
+    def __init__(self):
+        level = "data/level0.txt"  # we can change level design by changing txt file
+        self.load_map(level)
+        self.load_images()
+        self.make_solid_blocks()
+
+class Level_2(Board):
+    pass

@@ -4,50 +4,64 @@ from pygame.locals import *
 
 class Game:
     def __init__(self):
-        # create pygame window
+        # create external pygame window
         WINDOW_SIZE = (640, 480)
         self.screen = pygame.display.set_mode(WINDOW_SIZE, pygame.RESIZABLE)
         pygame.display.set_caption("Magma Boy and Hydro Girl")
 
+        # create internal pygame window
+        CHUNK_SIZE = 16
+        DISPLAY_SIZE = (32 * CHUNK_SIZE, 24 * CHUNK_SIZE)
+        self.display = pygame.Surface(DISPLAY_SIZE)
 
     def draw_board(self, board):
         """
-        Refresh and draw the game screen
+        Draw the board.
+
+        Iterate through the game map draw each chunk.
         """
-        new_window_size, center_cords = self.adjust_scale()
-        # scale internal display to match window
-        game_disp = pygame.transform.scale(board.get_board(), new_window_size)
-        self.screen.blit(game_disp, center_cords)
-        pygame.display.update()
+        # draw the full background
+        self.display.blit(board.board_image["wall"], (0, 0))
 
-    def adjust_scale(self):
-        """
-        Adjust internal screen for window scaling
-
-        If the window size is changed, scale the game to the maximum amount
-        while keeping the same aspect ratio. Also keep the game centered in the
-        window.
-
-        Returns:
-            display_size::tuple (height, width)
-                The updated height and width of the internal game display
-            cords::tuple (x_cord, y_cord)
-                The cordinates of the upper left corner of the internal game
-                display so that when it is blit onto window, it is centered.
-        """
-        window_size = self.screen.get_size()
-
-        # if window is longer than aspect ratio
-        if window_size[0] / window_size[1] >= 1.5:
-            display_size = (int(1.5 * window_size[1]), window_size[1])
-        # if window is taller than aspect ratio
-        else:
-            display_size = (window_size[0], int(.75 * window_size[0]))
-        # find cords so that display is centered
-        cords = ((window_size[0] - display_size[0]) / 2,
-                 (window_size[1] - display_size[1]) / 2)
-
-        return display_size, cords
+        # draw the solid blocks and liquids
+        for y, row in enumerate(board.game_map):
+            for x, tile in enumerate(row):
+                if tile == '100':
+                    self.display.blit(
+                        board.board_image["floor_100"], (x * 16, y * 16))
+                if tile == '111':
+                    self.display.blit(
+                        board.board_image["floor_111"], (x * 16, y * 16))
+                if tile == '112':
+                    self.display.blit(
+                        board.board_image["floor_112"], (x * 16, y * 16))
+                if tile == '113':
+                    self.display.blit(
+                        board.board_image["floor_113"], (x * 16, y * 16))
+                if tile == '114':
+                    self.display.blit(
+                        board.board_image["floor_114"], (x * 16, y * 16))
+                if tile == '121':
+                    self.display.blit(
+                        board.board_image["floor_121"], (x * 16, y * 16))
+                if tile == '122':
+                    self.display.blit(
+                        board.board_image["floor_122"], (x * 16, y * 16))
+                if tile == '123':
+                    self.display.blit(
+                        board.board_image["floor_123"], (x * 16, y * 16))
+                if tile == '124':
+                    self.display.blit(
+                        board.board_image["floor_124"], (x * 16, y * 16))
+                if tile == '2':
+                    self.display.blit(
+                        board.board_image["lava_image"], (x * 16, y * 16))
+                if tile == '3':
+                    self.display.blit(
+                        board.board_image["water_image"], (x * 16, y * 16))
+                if tile == '4':
+                    self.display.blit(
+                        board.board_image["goo_image"], (x * 16, y * 16))
 
     def move_player(self, board, player):
         collision_types = {
@@ -92,8 +106,48 @@ class Game:
                 hit_list.append(tile)
         return hit_list
 
-    def draw_player(self, board, player):
-        board.display.blit(player.image, (player.rect.x, player.rect.y))
+    def draw_player(self, player):
+        self.display.blit(player.image, (player.rect.x, player.rect.y))
+
+    def refresh_window(self):
+        """
+        Refresh and draw the game screen
+        """
+        new_window_size, center_cords = self.adjust_scale()
+        # scale internal display to match window
+        game_disp = pygame.transform.scale(self.display, new_window_size)
+        self.screen.blit(game_disp, center_cords)
+        pygame.display.update()
+
+    def adjust_scale(self):
+        """
+        Adjust internal screen for window scaling
+
+        If the window size is changed, scale the game to the maximum amount
+        while keeping the same aspect ratio. Also keep the game centered in the
+        window.
+
+        Returns:
+            display_size::tuple (height, width)
+                The updated height and width of the internal game display
+            cords::tuple (x_cord, y_cord)
+                The cordinates of the upper left corner of the internal game
+                display so that when it is blit onto window, it is centered.
+        """
+        window_size = self.screen.get_size()
+
+        # if window is longer than aspect ratio
+        if window_size[0] / window_size[1] >= 1.5:
+            display_size = (int(1.5 * window_size[1]), window_size[1])
+        # if window is taller than aspect ratio
+        else:
+            display_size = (window_size[0], int(.75 * window_size[0]))
+        # find cords so that display is centered
+        cords = ((window_size[0] - display_size[0]) / 2,
+                 (window_size[1] - display_size[1]) / 2)
+
+        return display_size, cords
+
 
 
 
@@ -111,6 +165,9 @@ class Game:
         # Framerate
         # Score
         # Level number
+
+
+
 # Def update board
 # Def update characters
     # Update character position based on acceleration, speed, current location

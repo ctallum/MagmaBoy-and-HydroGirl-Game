@@ -9,51 +9,50 @@ from pygame.locals import *
 
 # import classes
 from game import Game
-from board import Board
+from board import Level_1
 from character import MagmaBoy, HydroGirl
 from controller import MagmaBoyController, HydroGirlController
 
 
 def main():
     # inialize the game
-    clock = pygame.time.Clock()
     pygame.init()
+    clock = pygame.time.Clock()
+    
+    # initialize game
+    game = Game()
 
     # initialize board
-    board = Board()
-    level = "data/level0.txt"  # we can change level design by changing txt file
-    board.load_map(level)
-    board.load_images()
-    board.make_solid_blocks()
+    board = Level_1()
 
     # initialize player
     hydro_girl = HydroGirl()
     magma_boy = MagmaBoy()
 
-    # initialize game
-    game = Game()
-
     # intialize controllers
-    magma_boy_controller = MagmaBoyController(hydro_girl)
+    magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
     # main game loop
     while True:
-        # draw board
-        board.construct_board()
-
-        hydro_girl.calc_movement()
-
-        game.move_player(board, hydro_girl)
-
-        game.draw_player(board, hydro_girl)
-
         game.draw_board(board)
 
-        # check for keyboard input
-        hydro_girl_controller.get_user_input()
+        events = pygame.event.get()
 
-        # run game at rate of 60 fps
+        magma_boy_controller.get_user_input(events)
+        hydro_girl_controller.get_user_input(events)
+        
+        magma_boy.calc_movement()
+        hydro_girl.calc_movement()
+        
+        game.move_player(board, magma_boy)
+        game.move_player(board, hydro_girl)
+
+        game.draw_player(magma_boy)
+        game.draw_player(hydro_girl)
+
+        game.refresh_window()
+
         clock.tick(60)
 
 
