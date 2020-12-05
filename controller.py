@@ -4,11 +4,11 @@ from pygame.locals import *
 
 class Controller:
     def __init__(self, player):
-        pass
         self.player = player
 
-    def get_user_input(self):
-         for event in pygame.event.get():
+    def get_user_input(self, events):
+
+        for event in events:
             # if player closes the window
             if event.type == QUIT:
                 pygame.quit()
@@ -26,7 +26,8 @@ class Controller:
                     self.player.moving_right = False
                 if event.key == self.controls["left"]:
                     self.player.moving_left = False
-    
+
+
 class MagmaBoyController(Controller):
     def __init__(self, player):
         super().__init__(player)
