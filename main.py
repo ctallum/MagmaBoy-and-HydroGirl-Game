@@ -7,11 +7,11 @@ import sys
 import pygame
 from pygame.locals import *
 
-# import needed classes for game
-from board import Board
+# import classes
 from game import Game
-from players import Players
-from controller import Controller
+from board import Board
+from character import MagmaBoy, HydroGirl
+from controller import MagmaBoyController, HydroGirlController
 
 
 def main():
@@ -19,19 +19,40 @@ def main():
     clock = pygame.time.Clock()
     pygame.init()
 
-    # initialize classes
+    # initialize board
     board = Board()
+    level = "data/level0.txt"  # we can change level design by changing txt file
+    board.load_map(level)
+    board.load_images()
+    board.make_solid_blocks()
+
+    # initialize player
+    hydro_girl = HydroGirl()
+    magma_boy = MagmaBoy()
+
+    # initialize game
+    game = Game()
+
+    # intialize controllers
+    magma_boy_controller = MagmaBoyController(hydro_girl)
+    hydro_girl_controller = HydroGirlController(hydro_girl)
+
     # main game loop
     while True:
-        # check for keyboard input
-        for event in pygame.event.get():
-            # if player closes the window
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
+        # draw board
+        board.construct_board()
 
-        # update the diaplay
-        pygame.display.update()
+        hydro_girl.calc_movement()
+
+        game.move_player(board, hydro_girl)
+
+        game.draw_player(board, hydro_girl)
+
+        game.draw_board(board)
+
+        # check for keyboard input
+        hydro_girl_controller.get_user_input()
+
         # run game at rate of 60 fps
         clock.tick(60)
 
