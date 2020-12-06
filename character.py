@@ -6,12 +6,11 @@ class Character:
     def __init__(self):
         self.image = pygame.image.load('data/player_images/player.png')
         self.image.set_colorkey((255, 255, 255))
-        
         self.moving_right = False
         self.moving_left = False
         self.y_velocity = 0
         self.air_timer = 0
-        self.rect = pygame.Rect(0, 300, self.image.get_width(), self.image.get_height())
+        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
 
     def calc_movement(self):
         # set initially to not moving
