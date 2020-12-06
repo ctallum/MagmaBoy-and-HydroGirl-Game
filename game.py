@@ -11,7 +11,7 @@ class Game:
 
         # create internal pygame window
         CHUNK_SIZE = 16
-        DISPLAY_SIZE = (32 * CHUNK_SIZE, 24 * CHUNK_SIZE)
+        DISPLAY_SIZE = (34 * CHUNK_SIZE, 25 * CHUNK_SIZE)
         self.display = pygame.Surface(DISPLAY_SIZE)
 
     def draw_board(self, board):

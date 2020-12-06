@@ -5,12 +5,7 @@ from pygame.locals import *
 
 class Board:
     def __init__(self):
-        """
-        Initialize pygame window and internal display.
-
-        The internal display is a smaller resolution than the window display.
-        The internal display is scaled up to match the larger window display.
-        """
+        pass
 
     def load_map(self, path):
         '''
