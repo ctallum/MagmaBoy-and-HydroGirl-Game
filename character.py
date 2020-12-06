@@ -33,6 +33,8 @@ class Character:
 class MagmaBoy(Character):
     def __init__(self):
         super().__init__()
+        self.image = pygame.image.load('data/player_images/magmaboy.png')
+        self.image.set_colorkey((255, 0, 255))
 
 
 class HydroGirl(Character):

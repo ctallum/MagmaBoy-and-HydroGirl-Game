@@ -32,18 +32,18 @@ class MagmaBoyController(Controller):
     def __init__(self, player):
         super().__init__(player)
         self.controls = {
-            "left": K_a,
-            "right": K_d,
-            "up": K_w
+            "left": K_LEFT,
+            "right": K_RIGHT,
+            "up": K_UP
         }
 
 class HydroGirlController(Controller):
     def __init__(self, player):
         super().__init__(player)
         self.controls = {
-            "left": K_LEFT,
-            "right": K_RIGHT,
-            "up": K_UP
+            "left": K_a,
+            "right": K_d,
+            "up": K_w
         }
 
 
