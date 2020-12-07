@@ -14,6 +14,12 @@ class Game:
         DISPLAY_SIZE = (34 * CHUNK_SIZE, 25 * CHUNK_SIZE)
         self.display = pygame.Surface(DISPLAY_SIZE)
 
+        self.load_game_images()
+
+    def load_game_images(self):
+        self.death_screen = pygame.image.load('data/death_screen.png')
+        self.death_screen.set_colorkey((255, 0, 255))
+
     def draw_board(self, board):
         """
         Draw the board.
@@ -108,6 +114,28 @@ class Game:
 
     def draw_player(self, player):
         self.display.blit(player.image, (player.rect.x, player.rect.y))
+
+    def check_for_death(self, board, player):
+        if player.killed_with == "lava":
+            is_killed = self.collision_test(player.rect, board.get_lava_pools())
+        if player.killed_with == "water":
+            is_killed = self.collision_test(player.rect, board.get_water_pools())
+        is_killed += self.collision_test(player.rect, board.get_goo_pools())
+        if is_killed:
+            player.is_alive = False
+
+    def death_sequence(self, board, players, controller):
+        while True:
+            self.display.blit(self.death_screen, (0, 0))
+            self.refresh_window()
+            if controller.restart_level(pygame.event.get()):
+                break
+        self.reset_game(players)        
+
+
+    def reset_game(self, players):
+        for player in players:
+            player.reset_character()
 
     def refresh_window(self):
         """

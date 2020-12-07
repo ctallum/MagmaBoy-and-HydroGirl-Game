@@ -14,6 +14,10 @@ class Controller:
                 pygame.quit()
                 sys.exit()
             if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+
                 if event.key == self.controls["right"]:
                     self.player.moving_right = True
                 if event.key == self.controls["left"]:
@@ -26,6 +30,18 @@ class Controller:
                     self.player.moving_right = False
                 if event.key == self.controls["left"]:
                     self.player.moving_left = False
+    
+    def restart_level(events):
+        for event in events:
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == KEYDOWN:
+                if event.key == K_ESCAPE:
+                    pygame.quit()
+                    sys.exit()
+                if event.key == K_RETURN:
+                    return True           
 
 
 class MagmaBoyController(Controller):

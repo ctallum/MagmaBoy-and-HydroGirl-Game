@@ -70,12 +70,49 @@ class Board:
         """
         return self.solid_blocks
 
+    def make_lava_pools(self):
+        self.lava_pools = []
+        for y, row in enumerate(self.game_map):
+            for x, tile in enumerate(row):
+                if tile == "2":
+                    self.lava_pools.append(
+                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+        
+    def get_lava_pools(self):
+        return self.lava_pools
+
+    def make_water_pools(self):
+        self.water_pools = []
+        for y, row in enumerate(self.game_map):
+            for x, tile in enumerate(row):
+                if tile == "3":
+                    self.water_pools.append(
+                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+
+    def get_water_pools(self):
+        return self.water_pools
+
+    def make_goo_pools(self):
+        self.goo_pools = []
+        for y, row in enumerate(self.game_map):
+            for x, tile in enumerate(row):
+                if tile == "4":
+                    self.goo_pools.append(
+                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+
+    def get_goo_pools(self):
+        return self.goo_pools
+
+
 class Level_1(Board):
     def __init__(self):
         level = "data/level0.txt"  # we can change level design by changing txt file
         self.load_map(level)
         self.load_images()
         self.make_solid_blocks()
+        self.make_water_pools()
+        self.make_lava_pools()
+        self.make_goo_pools()
 
 class Level_2(Board):
     pass

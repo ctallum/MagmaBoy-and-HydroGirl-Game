@@ -11,7 +11,7 @@ from pygame.locals import *
 from game import Game
 from board import Level_1
 from character import MagmaBoy, HydroGirl
-from controller import MagmaBoyController, HydroGirlController
+from controller import MagmaBoyController, HydroGirlController, Controller
 
 
 def main():
@@ -45,8 +45,17 @@ def main():
         game.move_player(board, magma_boy)
         game.move_player(board, hydro_girl)
 
+        game.check_for_death(board, magma_boy)
+        game.check_for_death(board, hydro_girl)
+
         game.draw_player(magma_boy)
         game.draw_player(hydro_girl)
+
+        if hydro_girl.is_dead() or magma_boy.is_dead():
+            # show death screen
+            
+            game.death_sequence(board,[magma_boy, hydro_girl],Controller)
+
 
         game.refresh_window()
 

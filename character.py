@@ -11,6 +11,7 @@ class Character:
         self.y_velocity = 0
         self.air_timer = 0
         self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
+        self.is_alive = True
 
     def calc_movement(self):
         # set initially to not moving
@@ -28,12 +29,24 @@ class Character:
         if self.y_velocity > 3:
             self.y_velocity = 3
 
+    def reset_character(self):
+        self.moving_right = False
+        self.moving_left = False
+        self.y_velocity = 0
+        self.air_timer = 0
+        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
+        self.is_alive = True
+
+    def is_dead(self):
+        return not self.is_alive
+
 
 class MagmaBoy(Character):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('data/player_images/magmaboy.png')
         self.image.set_colorkey((255, 0, 255))
+        self.killed_with = "water"
 
 
 class HydroGirl(Character):
@@ -41,4 +54,5 @@ class HydroGirl(Character):
         super().__init__()
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
         self.image.set_colorkey((255, 0, 255))
+        self.killed_with = "lava"
 
