@@ -114,16 +114,3 @@ class Board:
     def get_goo_pools(self):
         return self.goo_pools
 
-
-class Level_1(Board):
-    def __init__(self):
-        level = "data/level0.txt"  # we can change level design by changing txt file
-        self.load_map(level)
-        self.load_images()
-        self.make_solid_blocks()
-        self.make_water_pools()
-        self.make_lava_pools()
-        self.make_goo_pools()
-
-class Level_2(Board):
-    pass
