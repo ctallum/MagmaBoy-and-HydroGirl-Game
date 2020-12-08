@@ -4,8 +4,19 @@ from pygame.locals import *
 
 
 class Board:
-    def __init__(self):
-        pass
+    def __init__(self, path):
+        """
+        Args:
+            path::str
+                A path to a text file containing block placements
+        """
+        level = path
+        self.load_map(level)
+        self.load_images()
+        self.make_solid_blocks()
+        self.make_water_pools()
+        self.make_lava_pools()
+        self.make_goo_pools()
 
     def load_map(self, path):
         '''

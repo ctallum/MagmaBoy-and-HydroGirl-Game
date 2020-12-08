@@ -9,7 +9,7 @@ from pygame.locals import *
 
 # import classes
 from game import Game
-from board import Level_1
+from board import Board
 from character import MagmaBoy, HydroGirl
 from controller import MagmaBoyController, HydroGirlController, Controller
 
@@ -22,7 +22,7 @@ def main():
     # initialize all classes used in game
     game = Game()
     
-    board = Level_1()
+    board = Board('data/level0.txt')
 
     hydro_girl = HydroGirl()
     magma_boy = MagmaBoy()
