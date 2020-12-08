@@ -13,34 +13,34 @@ class Controller:
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
+            elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
 
-                if event.key == self.controls["right"]:
+                elif event.key == self.controls["right"]:
                     self.player.moving_right = True
-                if event.key == self.controls["left"]:
+                elif event.key == self.controls["left"]:
                     self.player.moving_left = True
-                if event.key == self.controls["up"]:
+                elif event.key == self.controls["up"]:
                     if self.player.air_timer < 6:
                         self.player.y_velocity = -5.5
-            if event.type == KEYUP:
+            elif event.type == KEYUP:
                 if event.key == self.controls["right"]:
                     self.player.moving_right = False
-                if event.key == self.controls["left"]:
+                elif event.key == self.controls["left"]:
                     self.player.moving_left = False
     
-    def restart_level(events):
+    def press_key(events, key):
         for event in events:
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            if event.type == KEYDOWN:
+            elif event.type == KEYDOWN:
                 if event.key == K_ESCAPE:
                     pygame.quit()
                     sys.exit()
-                if event.key == K_RETURN:
+                elif event.key == key:
                     return True           
 
 
