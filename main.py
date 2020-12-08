@@ -30,6 +30,10 @@ def main():
     magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
+
+    # loading screen
+    game.loading_screen(Controller)
+
     # main game loop
     while True:
         game.draw_board(board)

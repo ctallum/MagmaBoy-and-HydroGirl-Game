@@ -19,6 +19,7 @@ class Game:
     def load_game_images(self):
         self.death_screen = pygame.image.load('data/death_screen.png')
         self.death_screen.set_colorkey((255, 0, 255))
+        self.menu_screen = pygame.image.load('data/menu_screen.png')
 
     def draw_board(self, board):
         """
@@ -35,37 +36,37 @@ class Game:
                 if tile == '100':
                     self.display.blit(
                         board.board_image["floor_100"], (x * 16, y * 16))
-                if tile == '111':
+                elif tile == '111':
                     self.display.blit(
                         board.board_image["floor_111"], (x * 16, y * 16))
-                if tile == '112':
+                elif tile == '112':
                     self.display.blit(
                         board.board_image["floor_112"], (x * 16, y * 16))
-                if tile == '113':
+                elif tile == '113':
                     self.display.blit(
                         board.board_image["floor_113"], (x * 16, y * 16))
-                if tile == '114':
+                elif tile == '114':
                     self.display.blit(
                         board.board_image["floor_114"], (x * 16, y * 16))
-                if tile == '121':
+                elif tile == '121':
                     self.display.blit(
                         board.board_image["floor_121"], (x * 16, y * 16))
-                if tile == '122':
+                elif tile == '122':
                     self.display.blit(
                         board.board_image["floor_122"], (x * 16, y * 16))
-                if tile == '123':
+                elif tile == '123':
                     self.display.blit(
                         board.board_image["floor_123"], (x * 16, y * 16))
-                if tile == '124':
+                elif tile == '124':
                     self.display.blit(
                         board.board_image["floor_124"], (x * 16, y * 16))
-                if tile == '2':
+                elif tile == '2':
                     self.display.blit(
                         board.board_image["lava_image"], (x * 16, y * 16))
-                if tile == '3':
+                elif tile == '3':
                     self.display.blit(
                         board.board_image["water_image"], (x * 16, y * 16))
-                if tile == '4':
+                elif tile == '4':
                     self.display.blit(
                         board.board_image["goo_image"], (x * 16, y * 16))
 
@@ -90,7 +91,7 @@ class Game:
             if player.movement[1] > 0:
                 player.rect.bottom = tile.top
                 collision_types['bottom'] = True
-            if player.movement[1] < 0:
+            elif player.movement[1] < 0:
                 player.rect.top = tile.bottom
                 collision_types['top'] = True
 
@@ -135,9 +136,16 @@ class Game:
         while True:
             self.display.blit(self.death_screen, (0, 0))
             self.refresh_window()
-            if controller.restart_level(pygame.event.get()):
+            if controller.press_key(pygame.event.get(), K_RETURN):
                 break
         self.reset_game(players)
+
+    def loading_screen(self, controller):
+        while True:
+            self.display.blit(self.menu_screen, (0, 0))
+            self.refresh_window()
+            if controller.press_key(pygame.event.get(), K_RETURN):
+                break
 
 
     def reset_game(self, players):
