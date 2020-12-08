@@ -5,7 +5,6 @@ from pygame.locals import *
 class Character:
     def __init__(self):
         self.image = pygame.image.load('data/player_images/player.png')
-        self.image.set_colorkey((255, 255, 255))
         self.moving_right = False
         self.moving_left = False
         self.y_velocity = 0
@@ -45,7 +44,7 @@ class MagmaBoy(Character):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('data/player_images/magmaboy.png')
-        self.image.set_colorkey((255, 0, 255))
+        self.side_image = pygame.image.load('data/player_images/magmaboy.png')
         self.killed_with = "water"
 
 
@@ -53,6 +52,6 @@ class HydroGirl(Character):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
-        self.image.set_colorkey((255, 0, 255))
+        self.side_image = pygame.image.load('data/player_images/hydrogirlside.png')
         self.killed_with = "lava"
 

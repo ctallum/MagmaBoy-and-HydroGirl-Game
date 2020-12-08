@@ -113,7 +113,14 @@ class Game:
         return hit_list
 
     def draw_player(self, player):
-        self.display.blit(player.image, (player.rect.x, player.rect.y))
+        if player.moving_right:
+            player_image = player.side_image
+        elif player.moving_left:
+            player_image = pygame.transform.flip(player.side_image, True, False)
+        else:
+            player_image = player.image
+        player_image.set_colorkey((255, 0, 255))
+        self.display.blit(player_image, (player.rect.x, player.rect.y))
 
     def check_for_death(self, board, player):
         if player.killed_with == "lava":
@@ -130,7 +137,7 @@ class Game:
             self.refresh_window()
             if controller.restart_level(pygame.event.get()):
                 break
-        self.reset_game(players)        
+        self.reset_game(players)
 
 
     def reset_game(self, players):
