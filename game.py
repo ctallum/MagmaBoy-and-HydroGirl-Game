@@ -77,9 +77,8 @@ class Game:
             'right': False,
             'left': False}
         player.rect.x += player.movement[0]
-        #collide_blocks = board.get_solid_blocks() + gates.get moving blocks
-        #change 2 below
-        hit_list = self.collision_test(player.rect, board.get_solid_blocks())
+        collide_blocks = board.get_solid_blocks() + gates.get_moving_blocks
+        hit_list = self.collision_test(player.rect, collide_blocks())
         for tile in hit_list:
             if player.movement[0] > 0:
                 player.rect.right = tile.left
@@ -88,7 +87,7 @@ class Game:
                 player.rect.left = tile.right
                 collision_types['left'] = True
         player.rect.y += player.movement[1]
-        hit_list = self.collision_test(player.rect, board.get_solid_blocks())
+        hit_list = self.collision_test(player.rect, collide_blocks())
         for tile in hit_list:
             if player.movement[1] > 0:
                 player.rect.bottom = tile.top
