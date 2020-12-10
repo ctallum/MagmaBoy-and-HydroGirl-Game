@@ -23,7 +23,7 @@ class Character:
 
         # calculate vertical movement
         self.movement[1] += self.y_velocity
-        self.y_velocity += 0.2
+        self.y_velocity += 0.15
         # establish terminal velocity of 3px/frame
         if self.y_velocity > 3:
             self.y_velocity = 3

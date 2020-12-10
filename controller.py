@@ -24,7 +24,7 @@ class Controller:
                     self.player.moving_left = True
                 elif event.key == self.controls["up"]:
                     if self.player.air_timer < 6:
-                        self.player.y_velocity = -5.5
+                        self.player.y_velocity = -4.5
             elif event.type == KEYUP:
                 if event.key == self.controls["right"]:
                     self.player.moving_right = False

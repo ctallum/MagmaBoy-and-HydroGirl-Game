@@ -52,6 +52,8 @@ def main():
         game.check_for_death(board, magma_boy)
         game.check_for_death(board, hydro_girl)
 
+        #game.check_for_gate_press(gate, player)
+
         game.draw_player(magma_boy)
         game.draw_player(hydro_girl)
 
