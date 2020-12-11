@@ -24,12 +24,15 @@ class Controller:
                     self.player.moving_left = True
                 elif event.key == self.controls["up"]:
                     if self.player.air_timer < 6:
-                        self.player.y_velocity = -5.5
+                        self.player.jumping = True
+
             elif event.type == KEYUP:
                 if event.key == self.controls["right"]:
                     self.player.moving_right = False
                 elif event.key == self.controls["left"]:
                     self.player.moving_left = False
+                elif event.key == self.controls["up"]:
+                    self.player.jumping = False
     
     def press_key(events, key):
         for event in events:
