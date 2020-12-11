@@ -30,6 +30,7 @@ def main():
     magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
+    gates_and_pplates = Gates()
 
     # loading screen
     game.loading_screen(Controller)
@@ -51,6 +52,8 @@ def main():
 
         game.check_for_death(board, magma_boy)
         game.check_for_death(board, hydro_girl)
+
+        #game.check_for_gate_press(gates_and_pplates, player)
 
         game.draw_player(magma_boy)
         game.draw_player(hydro_girl)
