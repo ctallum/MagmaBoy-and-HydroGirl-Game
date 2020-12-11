@@ -70,15 +70,15 @@ class Game:
                     self.display.blit(
                         board.board_image["goo_image"], (x * 16, y * 16))
 
-    def move_player(self, board, player):
+    def move_player(self, board, gates, player):
         collision_types = {
             'top': False,
             'bottom': False,
             'right': False,
             'left': False}
         player.rect.x += player.movement[0]
-        collide_blocks = board.get_solid_blocks() + gates.get_moving_blocks
-        hit_list = self.collision_test(player.rect, collide_blocks())
+        collide_blocks = board.get_solid_blocks() + gates.get_solid_blocks()
+        hit_list = self.collision_test(player.rect, collide_blocks)
         for tile in hit_list:
             if player.movement[0] > 0:
                 player.rect.right = tile.left
@@ -87,7 +87,7 @@ class Game:
                 player.rect.left = tile.right
                 collision_types['left'] = True
         player.rect.y += player.movement[1]
-        hit_list = self.collision_test(player.rect, collide_blocks())
+        hit_list = self.collision_test(player.rect, collide_blocks)
         for tile in hit_list:
             if player.movement[1] > 0:
                 player.rect.bottom = tile.top
@@ -192,32 +192,23 @@ class Game:
 
         return display_size, cords
 
-"""
-    def check_for_gate_press
-        is_plates += self.collision_test(player.rect, board.get_pressure_plates())
-        if list longer than 0
-            gate.button press = true
-        gate.open close funct
-"""
+    def draw_gates(self, gates):
+        self.display.blit(gates.gate_image, gates.gate_loc)
+
+        gates.plate_image.set_colorkey((255, 0, 255))
+        for location in gates.plate_locations:
+            self.display.blit(gates.plate_image, location)
 
 
 
+    def check_for_gate_press(self, gates, players):
+        plate_collisions = []
+        for player in players:
+            plate_collisions += self.collision_test(player.rect, gates.get_plates())
+        if plate_collisions:
+            gates.plate_is_pressed = True
+        else:
+            gates.plate_is_pressed = False
+        gates.try_open_gate()
 
-
-
-
-        # clock/time
-        # Framerate
-        # Score
-        # Level number
-
-
-
-# Def update board
-# Def update characters
-    # Update character position based on acceleration, speed, current location
-# Def kill
-# Def game_over
-# Def pushes (in-game buttons)
-# Def gems
 

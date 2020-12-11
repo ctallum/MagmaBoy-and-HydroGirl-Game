@@ -4,26 +4,43 @@ from pygame.locals import *
 
 class Gates:
     def __init__(self):
-        self.gate_image = pygame.image.load('data/gates_and_plates/gate.png')
-        self.plate_image = pygame.image.load('data/gates_and_plates/plate.png')
-        self.pplate_1 = (8,10)
-        self.pplate_2 = (22,10)
-        self.gate = pygame.Rect(16, 350, self.gate_image.get_width(), self.gate_image.get_height())
-        self.pplate_is_pressed = False
+        self.gate_loc = (300, 144)
+        self.plate_locations = [(425,168), (150,168)]
+        self.plate_is_pressed = False
         self.gate_is_open = False
 
-    #def if press open or close
-        #animate or disappear
+        self.load_images()
+        self.make_rects()
 
-    def get_moving_blocks(self):
-        self.moving_block_loc = []
-        return self.moving_block_loc.append(self.gate)
+    def load_images(self):
+        self.gate_image = pygame.image.load('data/gates_and_plates/gate.png')
+        self.plate_image = pygame.image.load('data/gates_and_plates/plate.png')
+    
+    def make_rects(self):
+        self.gate = pygame.Rect(self.gate_loc[0], self.gate_loc[1],
+                                self.gate_image.get_width(), self.gate_image.get_height())
+        
+        self.plates = []
+        for location in self.plate_locations:
+            self.plates.append(
+                pygame.Rect(location[0], location[1], 
+                self.plate_image.get_width(), self.plate_image.get_height())
+            )
 
-    def get_pplate_loc(self):
-            self.moving_pplate_loc = []
-            self.moving_pplate_loc.append(self.pplate_1)
-            self.moving_pplate_loc.append(self.pplate_2)
-            return self.moving_pplate_loc
 
-    #def load_images(self):
-        #load pics
+    def try_open_gate(self):
+        if self.plate_is_pressed and not self.gate_is_open:
+            self.gate_loc = (self.gate_loc[0], self.gate_loc[1] - 40)
+            self.gate.y -= 40
+            self.gate_is_open = True
+        if not self.plate_is_pressed and self.gate_is_open:
+            self.gate_loc = (self.gate_loc[0], self.gate_loc[1] + 40)
+            self.gate.y += 40
+            self.gate_is_open = False
+
+    def get_solid_blocks(self):
+        return [self.gate]
+
+    def get_plates(self):
+        return self.plates
+
