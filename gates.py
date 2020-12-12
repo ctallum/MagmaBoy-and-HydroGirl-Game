@@ -4,7 +4,7 @@ from pygame.locals import *
 
 class Gates:
     def __init__(self):
-        self.gate_loc = (300, 144)
+        self.gate_loc = (300, 128)
         self.plate_locations = [(425,168), (150,168)]
         self.plate_is_pressed = False
         self.gate_is_open = False

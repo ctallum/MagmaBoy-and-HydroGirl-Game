@@ -194,6 +194,7 @@ class Game:
 
     def draw_gates(self, gates):
         self.display.blit(gates.gate_image, gates.gate_loc)
+        gates.gate_image.set_colorkey((255, 0, 255))
 
         gates.plate_image.set_colorkey((255, 0, 255))
         for location in gates.plate_locations:
