@@ -1,6 +1,6 @@
 ## Magmaboy and Hydrogirl
 
-Meet the [Makers](https://ctallum.github.io/softdes-game-project/meet_the_makers.md)
+Meet the [Makers](https://ctallum.github.io/softdes-game-project/about/makers.md)
 
 You can use the [editor on GitHub](https://github.com/ctallum/softdes-game-project/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
 
