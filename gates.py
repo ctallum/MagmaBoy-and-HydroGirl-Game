@@ -4,7 +4,6 @@ from pygame.locals import *
 
 class Gates:
     def __init__(self):
-        print("true")
         self.plate_is_pressed = False
         self.gate_is_open = False
 
