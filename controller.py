@@ -6,10 +6,9 @@ class Controller:
     def __init__(self, player):
         self.player = player
 
-    def get_user_input(self, events):
-
+    @staticmethod
+    def check_for_end(events):
         for event in events:
-            # if player closes the window
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
@@ -18,7 +17,10 @@ class Controller:
                     pygame.quit()
                     sys.exit()
 
-                elif event.key == self.controls["right"]:
+    def control_players(self, events):
+        for event in events:
+            if event.type == KEYDOWN:
+                if event.key == self.controls["right"]:
                     self.player.moving_right = True
                 elif event.key == self.controls["left"]:
                     self.player.moving_left = True

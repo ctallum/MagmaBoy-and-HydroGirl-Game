@@ -44,24 +44,21 @@ def main():
 
         events = pygame.event.get()
 
-        magma_boy_controller.get_user_input(events)
-        hydro_girl_controller.get_user_input(events)
+        Controller.check_for_end(events)
+
+        magma_boy_controller.control_players(events)
+        hydro_girl_controller.control_players(events)
         
         magma_boy.calc_movement()
         hydro_girl.calc_movement()
         
-        game.move_player(board, gates, magma_boy)
-        game.move_player(board, gates, hydro_girl)
+        game.move_player(board, gates, [magma_boy, hydro_girl])
 
-        game.check_for_death(board, magma_boy)
-        game.check_for_death(board, hydro_girl)
+        game.check_for_death(board, [magma_boy, hydro_girl])
 
         game.check_for_gate_press(gates, [magma_boy, hydro_girl])
 
-        #game.check_for_gate_press(gates_and_pplates, player)
-
-        game.draw_player(magma_boy)
-        game.draw_player(hydro_girl)
+        game.draw_player([magma_boy, hydro_girl])
 
 
         if hydro_girl.is_dead() or magma_boy.is_dead():

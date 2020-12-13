@@ -54,8 +54,8 @@ class MagmaBoy(Character):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load('data/player_images/magmaboy.png')
-        self.side_image = pygame.image.load('data/player_images/magmaboy.png')
-        self.killed_with = "water"
+        self.side_image = pygame.image.load('data/player_images/magmaboyside.png')
+        self.type = "magma"
 
 
 class HydroGirl(Character):
@@ -63,5 +63,5 @@ class HydroGirl(Character):
         super().__init__()
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
         self.side_image = pygame.image.load('data/player_images/hydrogirlside.png')
-        self.killed_with = "lava"
+        self.type = "water"
 
