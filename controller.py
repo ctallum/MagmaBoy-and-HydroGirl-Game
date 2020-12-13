@@ -17,7 +17,7 @@ class Controller:
                     pygame.quit()
                     sys.exit()
 
-    def control_players(self, events):
+    def control_player(self, events):
         for event in events:
             if event.type == KEYDOWN:
                 if event.key == self.controls["right"]:
@@ -66,5 +66,4 @@ class HydroGirlController(Controller):
             "right": K_d,
             "up": K_w
         }
-
 

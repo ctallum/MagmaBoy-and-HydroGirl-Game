@@ -77,7 +77,6 @@ class Game:
                     self.display.blit(
                         board.board_image["goo_image"], (x * 16, y * 16))
 
-
     def move_player(self, board, gates, players):
         for player in players:
             collision_types = {
@@ -254,7 +253,7 @@ class Game:
         """
         Draw gates and buttons.
         """
-        self.display.blit(gates.gate_image, gates.gate_loc)
+        self.display.blit(gates.gate_image, gates.gate_location)
         gates.gate_image.set_colorkey((255, 0, 255))
 
         gates.plate_image.set_colorkey((255, 0, 255))
@@ -273,4 +272,3 @@ class Game:
         else:
             gates.plate_is_pressed = False
         gates.try_open_gate()
-

@@ -12,7 +12,7 @@ from game import Game
 from board import Board
 from character import MagmaBoy, HydroGirl
 from controller import MagmaBoyController, HydroGirlController, Controller
-from gates import Gates
+from gates import GatesLevel1
 
 
 def main():
@@ -31,7 +31,7 @@ def main():
     magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
-    gates = Gates()
+    gates = GatesLevel1()
 
     # loading screen
     game.loading_screen(Controller)
@@ -46,12 +46,12 @@ def main():
 
         Controller.check_for_end(events)
 
-        magma_boy_controller.control_players(events)
-        hydro_girl_controller.control_players(events)
-        
+        magma_boy_controller.control_player(events)
+        hydro_girl_controller.control_player(events)
+
         magma_boy.calc_movement()
         hydro_girl.calc_movement()
-        
+
         game.move_player(board, gates, [magma_boy, hydro_girl])
 
         game.check_for_death(board, [magma_boy, hydro_girl])
@@ -60,17 +60,13 @@ def main():
 
         game.draw_player([magma_boy, hydro_girl])
 
-
         if hydro_girl.is_dead() or magma_boy.is_dead():
             # show death screen
-            
             game.death_sequence(board,[magma_boy, hydro_girl],Controller)
-
 
         game.refresh_window()
 
         clock.tick(60)
-
 
 if __name__ == '__main__':
     main()
