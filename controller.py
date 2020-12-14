@@ -12,10 +12,6 @@ class Controller:
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-            elif event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
 
     def control_player(self, events):
         for event in events:
@@ -42,11 +38,9 @@ class Controller:
                 pygame.quit()
                 sys.exit()
             elif event.type == KEYDOWN:
-                if event.key == K_ESCAPE:
-                    pygame.quit()
-                    sys.exit()
-                elif event.key == key:
-                    return True           
+                if event.key == key:
+                    return True
+        return False           
 
 
 class MagmaBoyController(Controller):
