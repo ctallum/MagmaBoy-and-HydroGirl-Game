@@ -69,8 +69,11 @@ def main():
         game.draw_player([magma_boy, hydro_girl])
 
         if hydro_girl.is_dead() or magma_boy.is_dead():
-            # show death screen
-            game.death_sequence(board,[magma_boy, hydro_girl],Controller)
+            game.death_sequence([magma_boy, hydro_girl],Controller)
+
+        if game.level_is_done([fire_door, water_door]):
+            game.win_sequence(Controller)
+            break
 
         game.refresh_window()
 

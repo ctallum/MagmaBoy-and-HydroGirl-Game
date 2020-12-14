@@ -23,7 +23,10 @@ class Game:
         """
         self.death_screen = pygame.image.load('data/death_screen.png')
         self.death_screen.set_colorkey((255, 0, 255))
+        self.win_screen = pygame.image.load('data/win_screen.png')
+        self.win_screen.set_colorkey((255, 0, 255))
         self.menu_screen = pygame.image.load('data/menu_screen.png')
+
 
     def draw_board(self, board):
         """
@@ -181,17 +184,19 @@ class Game:
             if is_killed:
                 player.is_alive = False
 
-    def death_sequence(self, board, players, controller):
+    def death_sequence(self, players, controller):
         """
         Display a death screen until the user presses "ENTER" and the game
         restarts.
         """
+        self.display.blit(self.death_screen, (0, 0))
+        self.refresh_window()
         while True:
-            self.display.blit(self.death_screen, (0, 0))
-            self.refresh_window()
             if controller.press_key(pygame.event.get(), K_RETURN):
+                self.reset_game(players)
                 break
-        self.reset_game(players)
+            if controller.press_key(pygame.event.get(), K_ESCAPE):
+                pass
 
     def loading_screen(self, controller):
         """
@@ -288,7 +293,15 @@ class Game:
             door.player_at_door = False
         door.try_raise_door()
 
-    def check_for_win(self, doors):
-        win = False
+    def level_is_done(self, doors):
+        is_win = True
         for door in doors:
+            if not door.is_door_open():
+                is_win = False
+        return is_win
+
+    def win_sequence(self, controller):
+        self.display.blit(self.win_screen, (0, 0))
+        self.refresh_window()
+        while not controller.press_key(pygame.event.get(), K_RETURN):
             pass
