@@ -3,7 +3,9 @@ import pygame
 from pygame.locals import *
 
 class Gates:
-    def __init__(self):
+    def __init__(self, gate_location, plate_locatons):
+        self.gate_location = gate_location
+        self.plate_locations = plate_locatons
         self.plate_is_pressed = False
         self.gate_is_open = False
 
@@ -39,12 +41,3 @@ class Gates:
 
     def get_plates(self):
         return self.plates
-
-class GatesLevel1(Gates):
-    def __init__(self):
-        self.gate_location = (300, 128)
-        self.plate_locations = [(425,168), (150,168)]
-        super().__init__()
-
-class GatesLevel2(Gates):
-    pass

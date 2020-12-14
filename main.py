@@ -12,7 +12,7 @@ from game import Game
 from board import Board
 from character import MagmaBoy, HydroGirl
 from controller import MagmaBoyController, HydroGirlController, Controller
-from gates import GatesLevel1
+from gates import Gates
 
 
 def main():
@@ -31,7 +31,8 @@ def main():
     magma_boy_controller = MagmaBoyController(magma_boy)
     hydro_girl_controller = HydroGirlController(hydro_girl)
 
-    gates = GatesLevel1()
+
+    gates = Gates((300, 128), [(425,168), (150,168)])
 
     # loading screen
     game.loading_screen(Controller)
