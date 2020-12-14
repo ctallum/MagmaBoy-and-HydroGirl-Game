@@ -191,10 +191,11 @@ class Game:
         self.display.blit(self.death_screen, (0, 0))
         self.refresh_window()
         while True:
-            if controller.press_key(pygame.event.get(), K_RETURN):
+            events = pygame.event.get()
+            if controller.press_key(events, K_RETURN):
                 self.reset_game(players)
                 return "continue"
-            if controller.press_key(pygame.event.get(), K_ESCAPE):
+            if controller.press_key(events, K_ESCAPE):
                 return "escape"
 
     def loading_screen(self, controller):
