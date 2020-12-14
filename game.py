@@ -288,3 +288,7 @@ class Game:
             door.player_at_door = False
         door.try_raise_door()
 
+    def check_for_win(self, doors):
+        win = False
+        for door in doors:
+            pass

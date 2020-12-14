@@ -27,7 +27,7 @@ class Doors:
         if self.player_at_door and not self.door_open:
             self.door_location = (self.door_location[0], self.door_location[1] - door_animation_speed)
             self.height_raised += door_animation_speed
-            if self.height_raised >= 32:
+            if self.height_raised >= 31:
                 self.door_open = True
         elif not self.player_at_door:
             if self.height_raised > 0:
