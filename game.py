@@ -307,6 +307,7 @@ class Game:
 
     def draw_level_screen(self, level_select, controller):
         self.display.blit(level_select.screen, (0, 0))
+       
         self.display.blit(level_select.level1_image, 
             ((self.display.get_width() - level_select.level1_image.get_width())/2, 100))
         self.display.blit(level_select.level1_image, 
@@ -317,6 +318,9 @@ class Game:
             ((self.display.get_width() - level_select.level1_image.get_width())/2, 250))
         self.display.blit(level_select.level1_image, 
             ((self.display.get_width() - level_select.level1_image.get_width())/2, 300))
+        
+        self.display.blit(level_select.left_player, (50, 150))
+        self.display.blit(level_select.right_player, (430, 150))
 
     def user_select_level(self, level_select, controller):
         level_index = 0
