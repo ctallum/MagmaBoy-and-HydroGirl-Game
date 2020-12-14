@@ -272,3 +272,19 @@ class Game:
         else:
             gates.plate_is_pressed = False
         gates.try_open_gate()
+
+    def draw_doors(self, doors):
+        for door in doors:
+            self.display.blit(door.door_background, door.background_location)
+            self.display.blit(door.door_image, door.door_location)
+            self.display.blit(door.frame_image, door.frame_location)
+            door.frame_image.set_colorkey((255, 0, 255))
+
+    def check_for_door_open(self, door, player):
+        door_collision = self.collision_test(player.rect, [door.get_door()])
+        if door_collision:
+            door.player_at_door = True
+        else:
+            door.player_at_door = False
+        door.try_raise_door()
+

@@ -13,7 +13,7 @@ from board import Board
 from character import MagmaBoy, HydroGirl
 from controller import MagmaBoyController, HydroGirlController, Controller
 from gates import Gates
-
+from doors import FireDoor, WaterDoor
 
 def main():
     # inialize pygame
@@ -33,6 +33,9 @@ def main():
 
 
     gates = Gates((300, 128), [(425,168), (150,168)])
+
+    fire_door = FireDoor()
+    water_door = WaterDoor()
 
     # loading screen
     game.loading_screen(Controller)
@@ -58,6 +61,10 @@ def main():
         game.check_for_death(board, [magma_boy, hydro_girl])
 
         game.check_for_gate_press(gates, [magma_boy, hydro_girl])
+
+        game.draw_doors([fire_door, water_door])
+        game.check_for_door_open(fire_door, magma_boy)
+        game.check_for_door_open(water_door, hydro_girl)
 
         game.draw_player([magma_boy, hydro_girl])
 
