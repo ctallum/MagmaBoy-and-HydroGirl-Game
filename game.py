@@ -27,7 +27,6 @@ class Game:
         self.win_screen.set_colorkey((255, 0, 255))
         self.menu_screen = pygame.image.load('data/menu_screen.png')
 
-
     def draw_board(self, board):
         """
         Draw the board.
@@ -194,9 +193,9 @@ class Game:
         while True:
             if controller.press_key(pygame.event.get(), K_RETURN):
                 self.reset_game(players)
-                break
+                return "continue"
             if controller.press_key(pygame.event.get(), K_ESCAPE):
-                pass
+                return "escape"
 
     def loading_screen(self, controller):
         """
@@ -305,3 +304,47 @@ class Game:
         self.refresh_window()
         while not controller.press_key(pygame.event.get(), K_RETURN):
             pass
+
+    def draw_level_screen(self, level_select, controller):
+        self.display.blit(level_select.screen, (0, 0))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 100))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 150))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 200))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 250))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 300))
+
+    def user_select_level(self, level_select, controller):
+        level_index = 0
+        while True:
+            events = pygame.event.get()
+            if controller.press_key(events, K_DOWN):
+                level_index += 1
+                if level_index == 5:
+                    level_index = 0
+            if controller.press_key(events, K_UP):
+                level_index -= 1
+                if level_index == -1:
+                    level_index = 4
+            self.draw_level_screen(level_select, controller)
+            self.draw_level_select_indicator(level_select, level_index)
+            level_dict = {
+                0: "level1",
+                1: "level1",
+                2: "level1",
+                3: "level1",
+                4: "level1"
+            }
+            if controller.press_key(events, K_RETURN):
+                return level_dict[level_index]
+            
+    def draw_level_select_indicator(self, level_select, level_index):
+        location_x = (self.display.get_width() - level_select.indicator_image.get_width())/2
+        location_y = level_index*50 + 96
+        indicator_location = (location_x, location_y)
+        self.display.blit(level_select.indicator_image, indicator_location)
+        self.refresh_window()
