@@ -15,18 +15,6 @@ class Game:
         DISPLAY_SIZE = (34 * CHUNK_SIZE, 25 * CHUNK_SIZE)
         self.display = pygame.Surface(DISPLAY_SIZE)
 
-        self.load_game_images()
-
-    def load_game_images(self):
-        """
-        Load death and menu screens from local png files.
-        """
-        self.death_screen = pygame.image.load('data/death_screen.png')
-        self.death_screen.set_colorkey((255, 0, 255))
-        self.win_screen = pygame.image.load('data/win_screen.png')
-        self.win_screen.set_colorkey((255, 0, 255))
-        self.menu_screen = pygame.image.load('data/menu_screen.png')
-
     def draw_board(self, board):
         """
         Draw the board.
@@ -183,31 +171,6 @@ class Game:
             if is_killed:
                 player.is_alive = False
 
-    def death_sequence(self, players, controller):
-        """
-        Display a death screen until the user presses "ENTER" and the game
-        restarts.
-        """
-        self.display.blit(self.death_screen, (0, 0))
-        self.refresh_window()
-        while True:
-            events = pygame.event.get()
-            if controller.press_key(events, K_RETURN):
-                self.reset_game(players)
-                return "continue"
-            if controller.press_key(events, K_ESCAPE):
-                return "escape"
-
-    def loading_screen(self, controller):
-        """
-        Display a menu screen until the user presses ENTER.
-        """
-        while True:
-            self.display.blit(self.menu_screen, (0, 0))
-            self.refresh_window()
-            if controller.press_key(pygame.event.get(), K_RETURN):
-                break
-
     def reset_game(self, players):
         """
         Moves all of the playes to the begining location.
@@ -299,12 +262,6 @@ class Game:
             if not door.is_door_open():
                 is_win = False
         return is_win
-
-    def win_sequence(self, controller):
-        self.display.blit(self.win_screen, (0, 0))
-        self.refresh_window()
-        while not controller.press_key(pygame.event.get(), K_RETURN):
-            pass
 
     def draw_level_screen(self, level_select, controller):
         self.display.blit(level_select.screen, (0, 0))
