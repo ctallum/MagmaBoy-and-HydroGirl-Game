@@ -12,6 +12,8 @@ magma_boy = MagmaBoy()
 hydro_girl = HydroGirl()
 
 collision_cases = [
+# Check that if there is nothing, there is no collisions
+(hydro_girl, [], []),
 # Check for player collisions on floor
 (hydro_girl, [], []),
 # Check for player collisions on goo
