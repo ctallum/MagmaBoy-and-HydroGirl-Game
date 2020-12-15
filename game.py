@@ -111,6 +111,17 @@ class Game:
 
     # game mechanics
 
+    def draw_level_background(self, board):
+        """
+        Draw the background of the level.
+
+        Args:
+            board::board class object
+                board class object that contains information on chunk images
+                and thier locations
+        """
+        self.display.blit(board.get_background(), (0, 0))       
+
     def draw_board(self, board):
         """
         Draw the board.
@@ -121,15 +132,13 @@ class Game:
                 and thier locations
         """
         # draw the full background
-        board_images = board.get_board_images()
-        self.display.blit(board_images["wall"], (0, 0))
-
+        board_textures = board.get_board_textures()
         # draw the solid blocks and liquids
         for y, row in enumerate(board.get_game_map()):
             for x, tile in enumerate(row):
                 if tile != "0":
                     self.display.blit(
-                        board_images[f"{tile}"], (x * 16, y * 16)
+                        board_textures[f"{tile}"], (x * 16, y * 16)
                     )
 
     def draw_gates(self, gates):
@@ -171,6 +180,8 @@ class Game:
 
     def move_player(self, board, gates, players):
         for player in players:
+            
+            player.calc_movement()
             movement = player.get_movement()
             collision_types = {
                 'top': False,
@@ -208,15 +219,17 @@ class Game:
 
     def check_for_death(self, board, players):
         """
-        Check to see if player has falen in pool that kills them.
+        Check to see if player has falen in pool that kills them or if they are
+        crushed by a gate.
 
         If a magma type player collides with a water pool, they die. Likewise,
         if a water type player collides with a lava pool, they die. If either
         type of player collides with a goo pool, they die.
-
         Args:
             board::board class object
                 class object with information on board layout
+            gates::gate class object
+                class object with information on gate location and state
             players::[player object, player object]
                 A list of player class objects.
         """
@@ -226,6 +239,7 @@ class Game:
             if player.get_type() == "magma":
                 is_killed = self.collision_test(player.rect, board.get_water_pools())
             is_killed += self.collision_test(player.rect, board.get_goo_pools())
+
             if is_killed:
                 player.kill_player()
 

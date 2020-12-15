@@ -57,13 +57,12 @@ def show_death_screen(game, controller, level):
         if controller.press_key(events, K_ESCAPE):
             show_level_screen(game, controller)
 
-
-def run_game(game, controller, level): 
+def run_game(game, controller, level="level1"): 
     # load level data
     if level == "level1":
 
         board = Board('data/level1.txt')
-        gates = Gates((300, 128), [(425,168), (150,168)])
+        gates = Gates((285, 128), [(190,168), (390,168)])
 
         fire_door = FireDoor((64, 48), (64, 48), (48, 16))
         water_door = WaterDoor((128, 48), (128, 48), (112, 16))
@@ -87,6 +86,7 @@ def run_game(game, controller, level):
         events = pygame.event.get()
 
         # draw features of level
+        game.draw_level_background(board)
         game.draw_board(board)
         game.draw_gates(gates)
         game.draw_doors([fire_door, water_door])
@@ -97,9 +97,6 @@ def run_game(game, controller, level):
         # move player
         arrows_controller.control_player(events, magma_boy)
         wasd_controller.control_player(events, hydro_girl)
-
-        magma_boy.calc_movement()
-        hydro_girl.calc_movement()
 
         game.move_player(board, gates, [magma_boy, hydro_girl])
 
