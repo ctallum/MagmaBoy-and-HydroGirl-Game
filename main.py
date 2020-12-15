@@ -19,26 +19,45 @@ from level_select import LevelSelect
 def main():
     pygame.init()
     game = Game()
+    show_intro_screen(game, Controller)
 
-    game.loading_screen(Controller)
+def show_intro_screen(game, controller):
+    intro_screen = pygame.image.load('data/menu_screen.png')
+    game.display.blit(intro_screen, (0, 0))
+    game.refresh_window()
+    while True:
+        if controller.press_key(pygame.event.get(), K_RETURN):
+            show_level_screen(game, controller)
 
-    select_level(game)
-
-def select_level(game):
+def show_level_screen(game, controller):
     level_select = LevelSelect()
     level = game.user_select_level(level_select, Controller)
     run_game(game, level)
 
+def show_win_screen(game, controller):
+    win_screen = pygame.image.load('data/win_screen.png')
+    win_screen.set_colorkey((255, 0, 255))
+    game.display.blit(win_screen, (0, 0))
+    game.refresh_window()
+
+    while True:
+        if controller.press_key(pygame.event.get(), K_RETURN):
+            show_level_screen(game, controller)
+
+def show_death_screen(game, controller, level):
+    death_screen = pygame.image.load('data/death_screen.png')
+    death_screen.set_colorkey((255, 0, 255))
+    game.display.blit(death_screen, (0, 0))
+    game.refresh_window()
+    while True:
+        events = pygame.event.get()
+        if controller.press_key(events, K_RETURN):
+            run_game(game, level)
+        if controller.press_key(events, K_ESCAPE):
+            show_level_screen(game, controller)
+
 
 def run_game(game, level): 
-    clock = pygame.time.Clock()
-
-    hydro_girl = HydroGirl()
-    magma_boy = MagmaBoy()
-
-    magma_boy_controller = MagmaBoyController(magma_boy)
-    hydro_girl_controller = HydroGirlController(hydro_girl)
-
     if level == "level1":
 
         board = Board('data/level1.txt')
@@ -46,24 +65,30 @@ def run_game(game, level):
 
         fire_door = FireDoor((64, 48), (64, 48), (48, 16))
         water_door = WaterDoor((128, 48), (128, 48), (112, 16))
-    
-    if level == "level2":
-        pass
 
 
+    hydro_girl = HydroGirl()
+    magma_boy = MagmaBoy()
+
+    magma_boy_controller = MagmaBoyController(magma_boy)
+    hydro_girl_controller = HydroGirlController(hydro_girl)
+
+    clock = pygame.time.Clock()
     # main game loop
     while True:
-        game.draw_board(board)
-
-        game.draw_gates(gates)
-
+        # pygame management
+        clock.tick(60)
         events = pygame.event.get()
 
-        Controller.check_for_end(events)
+        # draw features of level
+        game.draw_board(board)
+        game.draw_gates(gates)
+        game.draw_doors([fire_door, water_door])
 
-        if Controller.press_key(events, K_ESCAPE):
-            select_level(game)
+        # draw player
+        game.draw_player([magma_boy, hydro_girl])
 
+        # move player
         magma_boy_controller.control_player(events)
         hydro_girl_controller.control_player(events)
 
@@ -72,30 +97,33 @@ def run_game(game, level):
 
         game.move_player(board, gates, [magma_boy, hydro_girl])
 
+        # check for player at special location
         game.check_for_death(board, [magma_boy, hydro_girl])
 
         game.check_for_gate_press(gates, [magma_boy, hydro_girl])
 
-        game.draw_doors([fire_door, water_door])
         game.check_for_door_open(fire_door, magma_boy)
         game.check_for_door_open(water_door, hydro_girl)
 
-        game.draw_player([magma_boy, hydro_girl])
-
-        if hydro_girl.is_dead() or magma_boy.is_dead():
-            action = game.death_sequence([magma_boy, hydro_girl],Controller)
-            if action == "continue":
-                pass
-            if action == "escape":
-                select_level(game)
-
-        if game.level_is_done([fire_door, water_door]):
-            game.win_sequence(Controller)
-            select_level(game)
-
+        # refresh window
         game.refresh_window()
 
-        clock.tick(60)
+        
+        # special events
+        if hydro_girl.is_dead() or magma_boy.is_dead():
+            show_death_screen(game, Controller, level)
+
+        if game.level_is_done([fire_door, water_door]):
+            show_win_screen(game, Controller)
+
+        if Controller.press_key(events, K_ESCAPE):
+            show_level_screen(game, Controller)
+        
+        for event in events:
+            if event.type == QUIT:
+                pygame.quit()
+                sys.exit()
+
 
 if __name__ == '__main__':
     main()

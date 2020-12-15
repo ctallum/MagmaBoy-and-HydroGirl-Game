@@ -5,13 +5,6 @@ from pygame.locals import *
 class Controller:
     def __init__(self, player):
         self.player = player
-
-    @staticmethod
-    def check_for_end(events):
-        for event in events:
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
     
     def control_player(self, events):
         for event in events:
