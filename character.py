@@ -4,14 +4,15 @@ from pygame.locals import *
 
 class Character:
     def __init__(self):
-        self.image = pygame.image.load('data/player_images/player.png')
+        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
+        # motion
         self.moving_right = False
         self.moving_left = False
-        self.jumping = False #here
+        self.jumping = False
         self.y_velocity = 0
         self.air_timer = 0
-        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
-        self.is_alive = True
+        # current state
+        self._alive = True
 
     def calc_movement(self):
         # Motion constants
@@ -21,47 +22,48 @@ class Character:
         TERMINAL_VELOCITY = 3
 
         # set initially to not moving
-        self.movement = [0, 0]
+        self._movement = [0, 0]
         # calculate horizontal movement
         if self.moving_right:
-            self.movement[0] += LATERAL_SPEED
+            self._movement[0] += LATERAL_SPEED
         if self.moving_left:
-            self.movement[0] -= LATERAL_SPEED
+            self._movement[0] -= LATERAL_SPEED
 
         # calculate vertical movement
         if self.jumping:
             self.y_velocity = JUMP_SPEED
             self.jumping = False
-        self.movement[1] += self.y_velocity
+        self._movement[1] += self.y_velocity
         self.y_velocity += GRAVITY
         # establish terminal velocity of 3px/frame
         if self.y_velocity > TERMINAL_VELOCITY:
             self.y_velocity = TERMINAL_VELOCITY
 
-    def reset_character(self):
-        self.moving_right = False
-        self.moving_left = False
-        self.y_velocity = 0
-        self.air_timer = 0
-        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
-        self.is_alive = True
+    def kill_player(self):
+        self._alive = False
+ 
+    def get_movement(self):
+        return self._movement
 
     def is_dead(self):
-        return not self.is_alive
+        return self._alive == False
+
+    def get_type(self):
+        return self._type
 
 
 class MagmaBoy(Character):
     def __init__(self):
-        super().__init__()
         self.image = pygame.image.load('data/player_images/magmaboy.png')
         self.side_image = pygame.image.load('data/player_images/magmaboyside.png')
-        self.type = "magma"
+        self._type = "magma"
+        super().__init__()
 
 
 class HydroGirl(Character):
     def __init__(self):
-        super().__init__()
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
         self.side_image = pygame.image.load('data/player_images/hydrogirlside.png')
-        self.type = "water"
+        self._type = "water"
+        super().__init__()
 

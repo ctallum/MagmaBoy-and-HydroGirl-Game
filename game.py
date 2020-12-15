@@ -3,7 +3,7 @@ import pygame
 from pygame.locals import *
 
 class Game:
-    # Class Meta Functions
+    # game meta functions
     def __init__(self):
         # create external pygame window
         WINDOW_SIZE = (640, 480)
@@ -15,161 +15,53 @@ class Game:
         DISPLAY_SIZE = (34 * CHUNK_SIZE, 25 * CHUNK_SIZE)
         self.display = pygame.Surface(DISPLAY_SIZE)
 
-    def draw_board(self, board):
-        """
-        Draw the board.
+    def draw_level_screen(self, level_select, controller):
+        self.display.blit(level_select.screen, (0, 0))
+       
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 100))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 150))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 200))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 250))
+        self.display.blit(level_select.level1_image, 
+            ((self.display.get_width() - level_select.level1_image.get_width())/2, 300))
+        
+        self.display.blit(level_select.left_player, (50, 150))
+        self.display.blit(level_select.right_player, (430, 150))    
 
-        Args:
-            board::board class object
-                board class object that contains information on chunk images
-                and thier locations
-        """
-        # draw the full background
-        self.display.blit(board.board_image["wall"], (0, 0))
-
-        # draw the solid blocks and liquids
-        for y, row in enumerate(board.game_map):
-            for x, tile in enumerate(row):
-                if tile == '100':
-                    self.display.blit(
-                        board.board_image["floor_100"], (x * 16, y * 16))
-                elif tile == '111':
-                    self.display.blit(
-                        board.board_image["floor_111"], (x * 16, y * 16))
-                elif tile == '112':
-                    self.display.blit(
-                        board.board_image["floor_112"], (x * 16, y * 16))
-                elif tile == '113':
-                    self.display.blit(
-                        board.board_image["floor_113"], (x * 16, y * 16))
-                elif tile == '114':
-                    self.display.blit(
-                        board.board_image["floor_114"], (x * 16, y * 16))
-                elif tile == '121':
-                    self.display.blit(
-                        board.board_image["floor_121"], (x * 16, y * 16))
-                elif tile == '122':
-                    self.display.blit(
-                        board.board_image["floor_122"], (x * 16, y * 16))
-                elif tile == '123':
-                    self.display.blit(
-                        board.board_image["floor_123"], (x * 16, y * 16))
-                elif tile == '124':
-                    self.display.blit(
-                        board.board_image["floor_124"], (x * 16, y * 16))
-                elif tile == '2':
-                    self.display.blit(
-                        board.board_image["lava_image"], (x * 16, y * 16))
-                elif tile == '3':
-                    self.display.blit(
-                        board.board_image["water_image"], (x * 16, y * 16))
-                elif tile == '4':
-                    self.display.blit(
-                        board.board_image["goo_image"], (x * 16, y * 16))
-
-    def move_player(self, board, gates, players):
-        for player in players:
-            collision_types = {
-                'top': False,
-                'bottom': False,
-                'right': False,
-                'left': False}
-            player.rect.x += player.movement[0]
-            collide_blocks = board.get_solid_blocks() + gates.get_solid_blocks()
-            hit_list = self.collision_test(player.rect, collide_blocks)
-            for tile in hit_list:
-                if player.movement[0] > 0:
-                    player.rect.right = tile.left
-                    collision_types['right'] = True
-                elif player.movement[0] < 0:
-                    player.rect.left = tile.right
-                    collision_types['left'] = True
-            player.rect.y += player.movement[1]
-            hit_list = self.collision_test(player.rect, collide_blocks)
-            for tile in hit_list:
-                if player.movement[1] > 0:
-                    player.rect.bottom = tile.top
-                    collision_types['bottom'] = True
-                elif player.movement[1] < 0:
-                    player.rect.top = tile.bottom
-                    collision_types['top'] = True
-
-            if collision_types['bottom']:
-                player.y_velocity = 0
-                player.air_timer = 0
-            else:
-                player.air_timer += 1
-
-            if collision_types['top']:
-                player.y_velocity = 0
-
-    @staticmethod
-    def collision_test(rect, tiles):
-        """
-        Create a list of tiles a pygame rect is colliding with.
-
-        Args:
-            rect::pygame.rect
-                A pygame rect that may be colliding with other rects.
-            tiles::[rect, rect, rect]
-                A list of pygame rects. The function checks to see if the
-                arguement "rect" colides with any of these "tiles".
-        Returns:
-            hit_list::list
-                A list of all "tiles" that the argument rect is colliding with.
-                If an empty list is returned, the rect is not colliding with
-                any tile.
-        """
-        hit_list = []
-        for tile in tiles:
-            if rect.colliderect(tile):
-                hit_list.append(tile)
-        return hit_list
-
-    def draw_player(self, players):
-        """
-        Draw the player.
-
-        If the player is moving right or left, draw the player as facing that
-        direction.
-
-        Args:
-            player::[player object, player object]
-                a list of player objects that contains movement data as well as
-                different images, one for each direction it can face.
-        """
-        for player in players:
-            if player.moving_right:
-                player_image = player.side_image
-            elif player.moving_left:
-                player_image = pygame.transform.flip(player.side_image, True, False)
-            else:
-                player_image = player.image
-            player_image.set_colorkey((255, 0, 255))
-            self.display.blit(player_image, (player.rect.x, player.rect.y))
-
-    def check_for_death(self, board, players):
-        """
-        Check to see if player has falen in pool that kills them.
-
-        If a magma type player collides with a water pool, they die. Likewise,
-        if a water type player collides with a lava pool, they die. If either
-        type of player collides with a goo pool, they die.
-
-        Args:
-            board::board class object
-                class object with information on board layout
-            players::[player object, player object]
-                A list of player class objects.
-        """
-        for player in players:
-            if player.type == "water":
-                is_killed = self.collision_test(player.rect, board.get_lava_pools())
-            if player.type == "magma":
-                is_killed = self.collision_test(player.rect, board.get_water_pools())
-            is_killed += self.collision_test(player.rect, board.get_goo_pools())
-            if is_killed:
-                player.is_alive = False
+    def user_select_level(self, level_select, controller):
+        level_index = 0
+        while True:
+            events = pygame.event.get()
+            if controller.press_key(events, K_DOWN):
+                level_index += 1
+                if level_index == 5:
+                    level_index = 0
+            if controller.press_key(events, K_UP):
+                level_index -= 1
+                if level_index == -1:
+                    level_index = 4
+            self.draw_level_screen(level_select, controller)
+            self.draw_level_select_indicator(level_select, level_index)
+            level_dict = {
+                0: "level1",
+                1: "level1",
+                2: "level1",
+                3: "level1",
+                4: "level1"
+            }
+            if controller.press_key(events, K_RETURN):
+                return level_dict[level_index]
+            
+    def draw_level_select_indicator(self, level_select, level_index):
+        location_x = (self.display.get_width() - level_select.indicator_image.get_width())/2
+        location_y = level_index*50 + 96
+        indicator_location = (location_x, location_y)
+        self.display.blit(level_select.indicator_image, indicator_location)
+        self.refresh_window()
 
     def reset_game(self, players):
         """
@@ -217,16 +109,125 @@ class Game:
 
         return display_size, cords
 
+    # game mechanics
+
+    def draw_board(self, board):
+        """
+        Draw the board.
+
+        Args:
+            board::board class object
+                board class object that contains information on chunk images
+                and thier locations
+        """
+        # draw the full background
+        board_images = board.get_board_images()
+        self.display.blit(board_images["wall"], (0, 0))
+
+        # draw the solid blocks and liquids
+        for y, row in enumerate(board.get_game_map()):
+            for x, tile in enumerate(row):
+                if tile != "0":
+                    self.display.blit(
+                        board_images[f"{tile}"], (x * 16, y * 16)
+                    )
+
     def draw_gates(self, gates):
         """
         Draw gates and buttons.
         """
         self.display.blit(gates.gate_image, gates.gate_location)
-        gates.gate_image.set_colorkey((255, 0, 255))
 
-        gates.plate_image.set_colorkey((255, 0, 255))
         for location in gates.plate_locations:
             self.display.blit(gates.plate_image, location)
+
+    def draw_doors(self, doors):
+        for door in doors:
+            self.display.blit(door.door_background, door.background_location)
+            self.display.blit(door.door_image, door.door_location)
+            self.display.blit(door.frame_image, door.frame_location)
+
+    def draw_player(self, players):
+        """
+        Draw the player.
+
+        If the player is moving right or left, draw the player as facing that
+        direction.
+
+        Args:
+            player::[player object, player object]
+                a list of player objects that contains movement data as well as
+                different images, one for each direction it can face.
+        """
+        for player in players:
+            if player.moving_right:
+                player_image = player.side_image
+            elif player.moving_left:
+                player_image = pygame.transform.flip(player.side_image, True, False)
+            else:
+                player_image = player.image
+            player_image.set_colorkey((255, 0, 255))
+            self.display.blit(player_image, (player.rect.x, player.rect.y))
+
+    def move_player(self, board, gates, players):
+        for player in players:
+            movement = player.get_movement()
+            collision_types = {
+                'top': False,
+                'bottom': False,
+                'right': False,
+                'left': False}
+            player.rect.x += movement[0]
+            collide_blocks = board.get_solid_blocks() + gates.get_solid_blocks()
+            hit_list = self.collision_test(player.rect, collide_blocks)
+            for tile in hit_list:
+                if movement[0] > 0:
+                    player.rect.right = tile.left
+                    collision_types['right'] = True
+                elif movement[0] < 0:
+                    player.rect.left = tile.right
+                    collision_types['left'] = True
+            player.rect.y += movement[1]
+            hit_list = self.collision_test(player.rect, collide_blocks)
+            for tile in hit_list:
+                if movement[1] > 0:
+                    player.rect.bottom = tile.top
+                    collision_types['bottom'] = True
+                elif movement[1] < 0:
+                    player.rect.top = tile.bottom
+                    collision_types['top'] = True
+
+            if collision_types['bottom']:
+                player.y_velocity = 0
+                player.air_timer = 0
+            else:
+                player.air_timer += 1
+
+            if collision_types['top']:
+                player.y_velocity = 0
+
+    def check_for_death(self, board, players):
+        """
+        Check to see if player has falen in pool that kills them.
+
+        If a magma type player collides with a water pool, they die. Likewise,
+        if a water type player collides with a lava pool, they die. If either
+        type of player collides with a goo pool, they die.
+
+        Args:
+            board::board class object
+                class object with information on board layout
+            players::[player object, player object]
+                A list of player class objects.
+        """
+        for player in players:
+            if player.get_type() == "water":
+                is_killed = self.collision_test(player.rect, board.get_lava_pools())
+            if player.get_type() == "magma":
+                is_killed = self.collision_test(player.rect, board.get_water_pools())
+            is_killed += self.collision_test(player.rect, board.get_goo_pools())
+            if is_killed:
+                player.kill_player()
 
     def check_for_gate_press(self, gates, players):
         """
@@ -240,13 +241,6 @@ class Game:
         else:
             gates.plate_is_pressed = False
         gates.try_open_gate()
-
-    def draw_doors(self, doors):
-        for door in doors:
-            self.display.blit(door.door_background, door.background_location)
-            self.display.blit(door.door_image, door.door_location)
-            self.display.blit(door.frame_image, door.frame_location)
-            door.frame_image.set_colorkey((255, 0, 255))
 
     def check_for_door_open(self, door, player):
         door_collision = self.collision_test(player.rect, [door.get_door()])
@@ -263,50 +257,25 @@ class Game:
                 is_win = False
         return is_win
 
-    def draw_level_screen(self, level_select, controller):
-        self.display.blit(level_select.screen, (0, 0))
-       
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 100))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 150))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 200))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 250))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 300))
-        
-        self.display.blit(level_select.left_player, (50, 150))
-        self.display.blit(level_select.right_player, (430, 150))
+    @staticmethod
+    def collision_test(rect, tiles):
+        """
+        Create a list of tiles a pygame rect is colliding with.
 
-    def user_select_level(self, level_select, controller):
-        level_index = 0
-        while True:
-            events = pygame.event.get()
-            if controller.press_key(events, K_DOWN):
-                level_index += 1
-                if level_index == 5:
-                    level_index = 0
-            if controller.press_key(events, K_UP):
-                level_index -= 1
-                if level_index == -1:
-                    level_index = 4
-            self.draw_level_screen(level_select, controller)
-            self.draw_level_select_indicator(level_select, level_index)
-            level_dict = {
-                0: "level1",
-                1: "level1",
-                2: "level1",
-                3: "level1",
-                4: "level1"
-            }
-            if controller.press_key(events, K_RETURN):
-                return level_dict[level_index]
-            
-    def draw_level_select_indicator(self, level_select, level_index):
-        location_x = (self.display.get_width() - level_select.indicator_image.get_width())/2
-        location_y = level_index*50 + 96
-        indicator_location = (location_x, location_y)
-        self.display.blit(level_select.indicator_image, indicator_location)
-        self.refresh_window()
+        Args:
+            rect::pygame.rect
+                A pygame rect that may be colliding with other rects.
+            tiles::[rect, rect, rect]
+                A list of pygame rects. The function checks to see if the
+                arguement "rect" colides with any of these "tiles".
+        Returns:
+            hit_list::list
+                A list of all "tiles" that the argument rect is colliding with.
+                If an empty list is returned, the rect is not colliding with
+                any tile.
+        """
+        hit_list = []
+        for tile in tiles:
+            if rect.colliderect(tile):
+                hit_list.append(tile)
+        return hit_list

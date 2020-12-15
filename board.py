@@ -30,12 +30,18 @@ class Board:
             path::str
                 path to txt file containing chunk data
         '''
-        self.game_map = []
+        self._game_map = []
 
         with open(path) as f:
             for line in f:
                 line = line.strip().split(',')  # convert string to list of str
-                self.game_map.append(line)
+                self._game_map.append(line)
+
+    def get_game_map(self):
+        """
+        Return game map
+        """
+        return self._game_map
 
     def load_images(self):
         """
@@ -43,74 +49,97 @@ class Board:
 
         Save textures in a dictionary.
         """
-        self.board_image = {
+        self._board_images = {
             "wall": pygame.image.load('data/board_textures/wall.png'),
-            "floor_100": pygame.image.load('data/board_textures/100.png'),
-            "floor_100": pygame.image.load('data/board_textures/100.png'),
-            "floor_111": pygame.image.load('data/board_textures/111.png'),
-            "floor_112": pygame.image.load('data/board_textures/112.png'),
-            "floor_113": pygame.image.load('data/board_textures/113.png'),
-            "floor_114": pygame.image.load('data/board_textures/114.png'),
-            "floor_121": pygame.image.load('data/board_textures/121.png'),
-            "floor_122": pygame.image.load('data/board_textures/122.png'),
-            "floor_123": pygame.image.load('data/board_textures/123.png'),
-            "floor_124": pygame.image.load('data/board_textures/124.png'),
-            "lava_image": pygame.image.load('data/board_textures/lava.png'),
-            "water_image": pygame.image.load('data/board_textures/puddle.png'),
-            "goo_image": pygame.image.load('data/board_textures/goo.png')
+            "100": pygame.image.load('data/board_textures/100.png'),
+            "100": pygame.image.load('data/board_textures/100.png'),
+            "111": pygame.image.load('data/board_textures/111.png'),
+            "112": pygame.image.load('data/board_textures/112.png'),
+            "113": pygame.image.load('data/board_textures/113.png'),
+            "114": pygame.image.load('data/board_textures/114.png'),
+            "121": pygame.image.load('data/board_textures/121.png'),
+            "122": pygame.image.load('data/board_textures/122.png'),
+            "123": pygame.image.load('data/board_textures/123.png'),
+            "124": pygame.image.load('data/board_textures/124.png'),
+            "2": pygame.image.load('data/board_textures/lava.png'),
+            "3": pygame.image.load('data/board_textures/water.png'),
+            "4": pygame.image.load('data/board_textures/goo.png')
         }
-        for texture in self.board_image.keys():
-            self.board_image[texture].set_colorkey((255, 0, 255))
+        for texture in self._board_images.keys():
+            self._board_images[texture].set_colorkey((255, 0, 255))
 
+    def get_board_images(self):
+        """
+        Return dictionary containing board images
+        """
+        return self._board_images
 
     def make_solid_blocks(self):
         """
         Iterate through the map and make the walls and ground solid blocks
         which the player can collide with.
         """
-        self.solid_blocks = []
-        for y, row in enumerate(self.game_map):
+        self._solid_blocks = []
+        for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
                 if tile not in ['0', '2', '3', '4']:
-                    self.solid_blocks.append(
+                    self._solid_blocks.append(
                         pygame.Rect(x * 16, y * 16, 16, 16))
 
     def get_solid_blocks(self):
         """
         Return a list of pygame rects that are solid.
         """
-        return self.solid_blocks
+        return self._solid_blocks
 
     def make_lava_pools(self):
-        self.lava_pools = []
-        for y, row in enumerate(self.game_map):
+        """
+        Create list containing lava pool rects
+        """
+        self._lava_pools = []
+        for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
                 if tile == "2":
-                    self.lava_pools.append(
+                    self._lava_pools.append(
                         pygame.Rect(x * 16, y * 16 + 8, 16, 8))
         
     def get_lava_pools(self):
-        return self.lava_pools
+        """
+        Return list contaning lava pool rects
+        """
+        return self._lava_pools
 
     def make_water_pools(self):
-        self.water_pools = []
-        for y, row in enumerate(self.game_map):
+        """
+        Create list containing water pool rects
+        """
+        self._water_pools = []
+        for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
                 if tile == "3":
-                    self.water_pools.append(
+                    self._water_pools.append(
                         pygame.Rect(x * 16, y * 16 + 8, 16, 8))
 
     def get_water_pools(self):
-        return self.water_pools
+        """
+        Return list containing water pool rects
+        """
+        return self._water_pools
 
     def make_goo_pools(self):
-        self.goo_pools = []
-        for y, row in enumerate(self.game_map):
+        """
+        Create list containing goo pool rects
+        """
+        self._goo_pools = []
+        for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
                 if tile == "4":
-                    self.goo_pools.append(
+                    self._goo_pools.append(
                         pygame.Rect(x * 16, y * 16 + 8, 16, 8))
 
     def get_goo_pools(self):
-        return self.goo_pools
+        """
+        Return list containing goo pool rects
+        """
+        return self._goo_pools
 

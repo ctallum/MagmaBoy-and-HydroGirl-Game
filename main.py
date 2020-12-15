@@ -11,18 +11,19 @@ from pygame.locals import *
 from game import Game
 from board import Board
 from character import MagmaBoy, HydroGirl
-from controller import MagmaBoyController, HydroGirlController, Controller
+from controller import ArrowsController, WASDController, GeneralController
 from gates import Gates
 from doors import FireDoor, WaterDoor
 from level_select import LevelSelect
 
 def main():
     pygame.init()
+    controller = GeneralController()
     game = Game()
-    show_intro_screen(game, Controller)
+    show_intro_screen(game, controller)
 
 def show_intro_screen(game, controller):
-    intro_screen = pygame.image.load('data/menu_screen.png')
+    intro_screen = pygame.image.load('data/screens/intro_screen.png')
     game.display.blit(intro_screen, (0, 0))
     game.refresh_window()
     while True:
@@ -31,11 +32,11 @@ def show_intro_screen(game, controller):
 
 def show_level_screen(game, controller):
     level_select = LevelSelect()
-    level = game.user_select_level(level_select, Controller)
-    run_game(game, level)
+    level = game.user_select_level(level_select, controller)
+    run_game(game, controller, level)
 
 def show_win_screen(game, controller):
-    win_screen = pygame.image.load('data/win_screen.png')
+    win_screen = pygame.image.load('data/screens/win_screen.png')
     win_screen.set_colorkey((255, 0, 255))
     game.display.blit(win_screen, (0, 0))
     game.refresh_window()
@@ -45,19 +46,20 @@ def show_win_screen(game, controller):
             show_level_screen(game, controller)
 
 def show_death_screen(game, controller, level):
-    death_screen = pygame.image.load('data/death_screen.png')
+    death_screen = pygame.image.load('data/screens/death_screen.png')
     death_screen.set_colorkey((255, 0, 255))
     game.display.blit(death_screen, (0, 0))
     game.refresh_window()
     while True:
         events = pygame.event.get()
         if controller.press_key(events, K_RETURN):
-            run_game(game, level)
+            run_game(game, controller, level)
         if controller.press_key(events, K_ESCAPE):
             show_level_screen(game, controller)
 
 
-def run_game(game, level): 
+def run_game(game, controller, level): 
+    # load level data
     if level == "level1":
 
         board = Board('data/level1.txt')
@@ -66,14 +68,18 @@ def run_game(game, level):
         fire_door = FireDoor((64, 48), (64, 48), (48, 16))
         water_door = WaterDoor((128, 48), (128, 48), (112, 16))
 
+    if level == "level2":
+        pass
 
+    # initialize needed classes
     hydro_girl = HydroGirl()
     magma_boy = MagmaBoy()
 
-    magma_boy_controller = MagmaBoyController(magma_boy)
-    hydro_girl_controller = HydroGirlController(hydro_girl)
+    arrows_controller = ArrowsController()
+    wasd_controller = WASDController()
 
     clock = pygame.time.Clock()
+
     # main game loop
     while True:
         # pygame management
@@ -89,8 +95,8 @@ def run_game(game, level):
         game.draw_player([magma_boy, hydro_girl])
 
         # move player
-        magma_boy_controller.control_player(events)
-        hydro_girl_controller.control_player(events)
+        arrows_controller.control_player(events, magma_boy)
+        wasd_controller.control_player(events, hydro_girl)
 
         magma_boy.calc_movement()
         hydro_girl.calc_movement()
@@ -108,17 +114,17 @@ def run_game(game, level):
         # refresh window
         game.refresh_window()
 
-        
         # special events
         if hydro_girl.is_dead() or magma_boy.is_dead():
-            show_death_screen(game, Controller, level)
+            show_death_screen(game, controller, level)
 
         if game.level_is_done([fire_door, water_door]):
-            show_win_screen(game, Controller)
+            show_win_screen(game, controller)
 
-        if Controller.press_key(events, K_ESCAPE):
-            show_level_screen(game, Controller)
+        if controller.press_key(events, K_ESCAPE):
+            show_level_screen(game, controller)
         
+        # close window is player clicks on [x]
         for event in events:
             if event.type == QUIT:
                 pygame.quit()

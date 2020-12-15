@@ -5,38 +5,40 @@ from pygame.locals import *
 class Doors:
     def __init__(self):
         self.player_at_door = False
-        self.height_raised = 0
-        self.door_open = False
+        self._height_raised = 0
+        self._door_open = False
 
         self.load_images()
         self.make_rects()
     
     def load_images(self):
         self.frame_image = pygame.image.load("data/door_images/door_frame.png")
+        self.frame_image.set_colorkey((255, 0, 255))
         self.door_background = pygame.image.load("data/door_images/door_background.png")
+        
 
     def make_rects(self):
-        self.rect = pygame.Rect(self.door_location[0], self.door_location[1],
+        self._rect = pygame.Rect(self.door_location[0], self.door_location[1],
                                 self.door_image.get_width(), self.door_image.get_height())
 
     def get_door(self):
-        return self.rect
+        return self._rect
 
     def is_door_open(self):
-        return self.door_open
+        return self._door_open
 
     def try_raise_door(self):
         DOOR_SPEED = 1.5
-        if self.player_at_door and not self.door_open:
+        if self.player_at_door and not self._door_open:
             self.door_location = (self.door_location[0], self.door_location[1] - DOOR_SPEED)
-            self.height_raised += DOOR_SPEED
-            if self.height_raised >= 31:
-                self.door_open = True
+            self._height_raised += DOOR_SPEED
+            if self._height_raised >= 31:
+                self._door_open = True
         elif not self.player_at_door:
-            if self.height_raised > 0:
-                self.height_raised -= DOOR_SPEED
+            if self._height_raised > 0:
+                self._height_raised -= DOOR_SPEED
                 self.door_location = (self.door_location[0], self.door_location[1] + DOOR_SPEED)
-                self.door_open = False
+                self._door_open = False
     
 
 class FireDoor(Doors):
