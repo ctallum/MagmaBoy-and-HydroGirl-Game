@@ -5,21 +5,27 @@ import pygame
 from pygame.locals import *
 
 from game import (
-    __init__
+    Game
 )
 
 
-__init__cases = [
-# Check Window Size
+collision_cases = [
+# Check for player collisions on floor
+(player.rect, board.get_solid_blocks(), [])
+# Check for player collisions on goo
+
+# Check for player collisions on gates
+
+# Check for player collisions on doors
 
 ]
 
 
 # Define standard testing functions to check functions' outputs given certain
 # inputs defined above.
-@pytest.mark.parametrize("nucleotide,complement", __init__cases)
-def test__init__(nucleotide, complement):
-    assert get_complement(nucleotide) == complement
+@pytest.mark.parametrize("rectangle,tile,hit_list", collision_cases)
+def test_collision(rectangle,tile):
+    assert Game.collision(rectangle, tile) == hit_list
 
 
 
