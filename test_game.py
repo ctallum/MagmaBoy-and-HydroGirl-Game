@@ -7,11 +7,15 @@ from pygame.locals import *
 from game import (
     Game
 )
-
+from character import MagmaBoy, HydroGirl
+magma_boy = MagmaBoy()
+hydro_girl = HydroGirl()
 
 collision_cases = [
+# Check that if there is nothing, there is no collisions
+(hydro_girl, [], []),
 # Check for player collisions on floor
-(player.rect, board.get_solid_blocks(), [])
+(hydro_girl, [], []),
 # Check for player collisions on goo
 
 # Check for player collisions on gates
@@ -24,9 +28,8 @@ collision_cases = [
 # Define standard testing functions to check functions' outputs given certain
 # inputs defined above.
 @pytest.mark.parametrize("rectangle,tile,hit_list", collision_cases)
-def test_collision(rectangle,tile):
-    assert Game.collision(rectangle, tile) == hit_list
-
+def test_collision(rectangle,tile,hit_list):
+    assert Game.collision_test(rectangle, tile) == hit_list
 
 
 """
