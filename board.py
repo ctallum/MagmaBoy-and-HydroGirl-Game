@@ -45,12 +45,13 @@ class Board:
 
     def load_images(self):
         """
-        Load all board chunk textures from local folder "data/board_textures
+        Load all images needed to draw level background and platforms.
 
-        Save textures in a dictionary.
+        Load in level background.Load all board chunk textures from local
+        folder "data/board_textures and save textures in a dictionary. 
         """
-        self._board_images = {
-            "wall": pygame.image.load('data/board_textures/wall.png'),
+        self._background = pygame.image.load('data/board_textures/wall.png')
+        self._board_textures = {
             "100": pygame.image.load('data/board_textures/100.png'),
             "100": pygame.image.load('data/board_textures/100.png'),
             "111": pygame.image.load('data/board_textures/111.png'),
@@ -65,14 +66,20 @@ class Board:
             "3": pygame.image.load('data/board_textures/water.png'),
             "4": pygame.image.load('data/board_textures/goo.png')
         }
-        for texture in self._board_images.keys():
-            self._board_images[texture].set_colorkey((255, 0, 255))
+        for texture in self._board_textures.keys():
+            self._board_textures[texture].set_colorkey((255, 0, 255))
 
-    def get_board_images(self):
+    def get_background(self):
+        """
+        Return image of level background
+        """
+        return self._background
+
+    def get_board_textures(self):
         """
         Return dictionary containing board images
         """
-        return self._board_images
+        return self._board_textures
 
     def make_solid_blocks(self):
         """

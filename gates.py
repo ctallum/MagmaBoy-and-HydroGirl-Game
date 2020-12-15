@@ -39,12 +39,12 @@ class Gates:
         If person is on button, open gate, otherwise, keep gate closed
         """
         if self.plate_is_pressed and not self._gate_is_open:
-            self.gate_location = (self.gate_location[0], self.gate_location[1] - 40)
-            self._gate.y -= 40
+            self.gate_location = (self.gate_location[0], self.gate_location[1] - 32)
+            self._gate.y -= 32
             self._gate_is_open = True
         if not self.plate_is_pressed and self._gate_is_open:
-            self.gate_location = (self.gate_location[0], self.gate_location[1] + 40)
-            self._gate.y += 40
+            self.gate_location = (self.gate_location[0], self.gate_location[1] + 32)
+            self._gate.y += 32
             self._gate_is_open = False
 
     def get_solid_blocks(self):
