@@ -145,9 +145,9 @@ def test_movement(moving_right, moving_left, jumping,
                   moved_right, moved_left, jumped):
     # initialize everything
     controller = GeneralController()
-    player = HydroGirl()
-    player.rect.x = 32
-    player.rect.y = 336
+    player_cords = (32, 336)
+    player = HydroGirl(player_cords)
+
     gates = Gates((285, 128), [(190,168), (390,168)])
     board = Board('data/level1.txt')
 
