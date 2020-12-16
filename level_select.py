@@ -13,8 +13,15 @@ class LevelSelect():
         # main background screen
         self.screen = pygame.image.load('data/screens/level_select_screen.png')
         # titles for each level
-        self.level1_image = pygame.image.load('data/screens/level1.png')
-        self.level1_image.set_colorkey((255, 0, 255))
+        self.titles = {
+            1: pygame.image.load('data/screens/level1.png'),
+            2: pygame.image.load('data/screens/level2.png'),
+            3: pygame.image.load('data/screens/level3.png'),
+            4: pygame.image.load('data/screens/level4.png'),
+            5: pygame.image.load('data/screens/level5.png'),
+        }
+        for title in self.titles.keys():
+            self.titles[title].set_colorkey((255, 0, 255))
         # indicator to show which level is currently selected
         self.indicator_image = pygame.image.load('data/screens/indicator.png')
         self.indicator_image.set_colorkey((255, 0, 255))

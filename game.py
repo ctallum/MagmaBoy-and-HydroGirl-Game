@@ -17,17 +17,11 @@ class Game:
 
     def draw_level_screen(self, level_select, controller):
         self.display.blit(level_select.screen, (0, 0))
-       
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 100))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 150))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 200))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 250))
-        self.display.blit(level_select.level1_image, 
-            ((self.display.get_width() - level_select.level1_image.get_width())/2, 300))
+
+        for level in range(5):
+            image = level_select.titles[level+1]
+            self.display.blit(image, ((self.display.get_width() - image.get_width())/2, 50*level + 100))
+
         
         self.display.blit(level_select.left_player, (50, 150))
         self.display.blit(level_select.right_player, (430, 150))    
