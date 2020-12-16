@@ -1,4 +1,4 @@
-#Magmaboy and Hydrogirl
+# Magmaboy and Hydrogirl
 
 Meet the [Makers](https://ctallum.github.io/softdes-game-project/makers.md)
 
