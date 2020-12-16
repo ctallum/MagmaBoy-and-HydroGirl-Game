@@ -71,7 +71,7 @@ def run_game(game, controller, level="level1"):
         doors = [fire_door, water_door]
 
     if level == "level2":
-        board = Board('data/level1.txt')
+        board = Board('data/level2.txt')
         gates = []
 
         fire_door_location = (64, 48)
