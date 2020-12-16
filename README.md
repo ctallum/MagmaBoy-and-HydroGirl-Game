@@ -37,11 +37,10 @@ More in depth instilation instructions as well as guides to setting up pygame on
 https://www.pygame.org/wiki/GettingStarted
 ## Running the game
 
-Running the game is really simple. Once the Installation procedure is complete, just go to the game directory and run
+Running the game is really simple. Once the Installation procedure is complete, go to the game directory and run the following line:
 ```
 python main.py
 ```
-in the terminal.
 
 Once the game is running, a screen will pop up showing you the menu and directions. Use the Arrow Keys to control Magmaboy, WASD keys to control Hydrogirl. Once you are in the level, pressing Escape at any time will return the user to the level select screen.
 
