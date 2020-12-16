@@ -8,6 +8,8 @@ from pygame.locals import *
 # import classes
 from game import Game
 from doors import FireDoor, WaterDoor
+from controller import ArrowsController, WASDController, GeneralController
+from level_select import LevelSelect
 
 #characters at start
 magma_boy = pygame.Rect(16,350,16,32)
