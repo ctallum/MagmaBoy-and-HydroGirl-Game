@@ -264,7 +264,8 @@ class Game:
             door.player_at_door = False
         door.try_raise_door()
 
-    def level_is_done(self, doors):
+    @staticmethod
+    def level_is_done(doors):
         is_win = True
         for door in doors:
             if not door.is_door_open():
