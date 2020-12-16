@@ -84,23 +84,23 @@ def test_collision(player, tile, hit_list):
 
 
 # both doors closed
-fire_door = FireDoor((64, 48), (64, 48), (48, 16))
-water_door = WaterDoor((128, 48), (128, 48), (112, 16))
+fire_door = FireDoor((64, 48))
+water_door = WaterDoor((128, 48))
 
 # both doors open
-fire_door_both = FireDoor((16, 350), (16, 350), (0, 318))
+fire_door_both = FireDoor((16, 350))
 fire_door_both._door_open = True
-water_door_both = WaterDoor((16, 350), (16, 350), (0, 318))
+water_door_both = WaterDoor((16, 350))
 water_door_both._door_open = True
 
 # fire door open, water door closed
-fire_door_magma = FireDoor((16, 350), (16, 350), (0, 318))
+fire_door_magma = FireDoor((16, 350))
 fire_door_magma._door_open = True
-water_door_magma = WaterDoor((128, 48), (128, 48), (112, 16))
+water_door_magma = WaterDoor((128, 48))
 
 # water door open, fire door closed
-fire_door_hydro = FireDoor((64, 48), (64, 48), (48, 16))
-water_door_hydro = WaterDoor((16, 350), (16, 350), (0, 318))
+fire_door_hydro = FireDoor((64, 48))
+water_door_hydro = WaterDoor((16, 350))
 water_door_hydro._door_open = True
 
 level_done_cases = [
@@ -116,6 +116,54 @@ level_done_cases = [
 ]
 
 
-@pytest.mark.parametrize("doors,win_status", level_done_cases)
+@pytest.mark.parametrize("doors, win_status", level_done_cases)
 def test_level_is_done(doors, win_status):
-    assert Game.level_is_done(doors, doors) == win_status
+    assert Game.level_is_done(doors) == win_status
+
+
+
+motion_test_cases = [
+    # player is moving right, player moved right
+    (True, False, False, True, False, False),
+    # player is moving left, player moved left
+    (False, True, False, False, True, False),
+    # player is jumping, player height increased
+    (False, False, True, False, False, True),
+    # player is moving right and jumping, player moved right and height incrased
+    (True, False, True, True, False, True),
+    # player is moving left and jumping, player moved left and height incrased
+    (False, True, True, False, True, True),
+]
+
+from character import HydroGirl
+from gates import Gates
+from board import Board
+
+@pytest.mark.parametrize("moving_right, moving_left, jumping, \
+                         moved_right, moved_left, jumped", motion_test_cases)
+def test_movement(moving_right, moving_left, jumping,
+                  moved_right, moved_left, jumped):
+    # initialize everything
+    controller = GeneralController()
+    player = HydroGirl()
+    player.rect.x = 32
+    player.rect.y = 336
+    gates = Gates((285, 128), [(190,168), (390,168)])
+    board = Board('data/level1.txt')
+
+    # inital locaton
+    init_x = player.rect.x
+    init_y = player.rect.y
+
+    # set player movement
+    player.moving_right = moving_right
+    player.moving_left = moving_left
+    player.jumping = jumping
+
+    Game.move_player(Game(), board, [gates], [player])
+
+    assert (player.rect.x > init_x) == moved_right
+    assert (player.rect.x < init_x) == moved_left
+    assert (player.rect.y < init_y) == jumped
+
+

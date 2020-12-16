@@ -48,7 +48,7 @@ class Game:
             self.draw_level_select_indicator(level_select, level_index)
             level_dict = {
                 0: "level1",
-                1: "level1",
+                1: "level2",
                 2: "level1",
                 3: "level1",
                 4: "level1"
@@ -145,10 +145,11 @@ class Game:
         """
         Draw gates and buttons.
         """
-        self.display.blit(gates.gate_image, gates.gate_location)
+        for gate in gates:
+            self.display.blit(gate.gate_image, gate.gate_location)
 
-        for location in gates.plate_locations:
-            self.display.blit(gates.plate_image, location)
+            for location in gate.plate_locations:
+                self.display.blit(gate.plate_image, location)
 
     def draw_doors(self, doors):
         for door in doors:
@@ -189,7 +190,9 @@ class Game:
                 'right': False,
                 'left': False}
             player.rect.x += movement[0]
-            collide_blocks = board.get_solid_blocks() + gates.get_solid_blocks()
+            collide_blocks = board.get_solid_blocks()
+            for gate in gates:
+                collide_blocks += gate.get_solid_blocks()
             hit_list = self.collision_test(player.rect, collide_blocks)
             for tile in hit_list:
                 if movement[0] > 0:
@@ -247,14 +250,15 @@ class Game:
         """
         Check to see if either player is touching one of the gate buttons.
         """
-        plate_collisions = []
-        for player in players:
-            plate_collisions += self.collision_test(player.rect, gates.get_plates())
-        if plate_collisions:
-            gates.plate_is_pressed = True
-        else:
-            gates.plate_is_pressed = False
-        gates.try_open_gate()
+        for gate in gates:
+            plate_collisions = []
+            for player in players:
+                plate_collisions += self.collision_test(player.rect, gate.get_plates())
+            if plate_collisions:
+                gate.plate_is_pressed = True
+            else:
+                gate.plate_is_pressed = False
+            gate.try_open_gate()
 
     def check_for_door_open(self, door, player):
         door_collision = self.collision_test(player.rect, [door.get_door()])
@@ -264,7 +268,8 @@ class Game:
             door.player_at_door = False
         door.try_raise_door()
 
-    def level_is_done(self, doors):
+    @staticmethod
+    def level_is_done(doors):
         is_win = True
         for door in doors:
             if not door.is_door_open():
