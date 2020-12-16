@@ -89,7 +89,7 @@ def run_game(game, controller, level="level1"):
 
         magma_boy_location = (16, 336)
         magma_boy = MagmaBoy(magma_boy_location)
-        hydro_girl_location = (4835, 336)
+        hydro_girl_location = (35, 336)
         hydro_girl = HydroGirl(hydro_girl_location)
 
     if level == "level3":
