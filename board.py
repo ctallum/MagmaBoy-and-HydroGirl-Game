@@ -48,7 +48,7 @@ class Board:
         Load all images needed to draw level background and platforms.
 
         Load in level background.Load all board chunk textures from local
-        folder "data/board_textures and save textures in a dictionary. 
+        folder "data/board_textures and save textures in a dictionary.
         """
         self._background = pygame.image.load('data/board_textures/wall.png')
         self._board_textures = {
@@ -109,7 +109,7 @@ class Board:
                 if tile == "2":
                     self._lava_pools.append(
                         pygame.Rect(x * 16, y * 16 + 8, 16, 8))
-        
+
     def get_lava_pools(self):
         """
         Return list contaning lava pool rects
@@ -149,4 +149,3 @@ class Board:
         Return list containing goo pool rects
         """
         return self._goo_pools
-
