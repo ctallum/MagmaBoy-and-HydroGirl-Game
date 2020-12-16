@@ -1,8 +1,8 @@
-Meet the [Makers](https://ctallum.github.io/softdes-game-project/makers.md)
+- [Meet the Makers](https://ctallum.github.io/softdes-game-project/makers.md)
 
-Get the [Game](https://ctallum.github.io/softdes-game-project/installation.md)
+- [Get the Game](https://ctallum.github.io/softdes-game-project/installation.md)
 
-Our [Inspiration and Sources](https://ctallum.github.io/softdes-game-project/sources.md)
+- [Our Inspiration and Sources](https://ctallum.github.io/softdes-game-project/sources.md)
 
 
 ## Magmaboy and Hydrogirl
