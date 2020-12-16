@@ -25,8 +25,8 @@ def main():
 def show_intro_screen(game, controller):
     intro_screen = pygame.image.load('data/screens/intro_screen.png')
     game.display.blit(intro_screen, (0, 0))
-    game.refresh_window()
     while True:
+        game.refresh_window()
         if controller.press_key(pygame.event.get(), K_RETURN):
             show_level_screen(game, controller)
 
@@ -39,9 +39,9 @@ def show_win_screen(game, controller):
     win_screen = pygame.image.load('data/screens/win_screen.png')
     win_screen.set_colorkey((255, 0, 255))
     game.display.blit(win_screen, (0, 0))
-    game.refresh_window()
 
     while True:
+        game.refresh_window()
         if controller.press_key(pygame.event.get(), K_RETURN):
             show_level_screen(game, controller)
 
@@ -49,8 +49,8 @@ def show_death_screen(game, controller, level):
     death_screen = pygame.image.load('data/screens/death_screen.png')
     death_screen.set_colorkey((255, 0, 255))
     game.display.blit(death_screen, (0, 0))
-    game.refresh_window()
     while True:
+        game.refresh_window()
         events = pygame.event.get()
         if controller.press_key(events, K_RETURN):
             run_game(game, controller, level)

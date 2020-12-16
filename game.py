@@ -75,7 +75,7 @@ class Game:
         Refresh and draw the game screen
         """
         new_window_size, center_cords = self.adjust_scale()
-        # scale internal display to match window
+        # scale internal display to match window)
         game_disp = pygame.transform.scale(self.display, new_window_size)
         self.screen.blit(game_disp, center_cords)
         pygame.display.update()
