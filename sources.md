@@ -1,5 +1,10 @@
-# Our Inspiration and Sources
+- [Home](https://ctallum.github.io/softdes-game-project/)
 
+- [Get the Game](https://ctallum.github.io/softdes-game-project/installation.md)
+
+- [Meet the Makers](https://ctallum.github.io/softdes-game-project/makers.md)
+
+## Our Inspiration and Sources
 
 ### Fireboy and Watergirl
 
