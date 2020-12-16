@@ -43,7 +43,7 @@ class Game:
             level_dict = {
                 0: "level1",
                 1: "level2",
-                2: "level1",
+                2: "level3",
                 3: "level1",
                 4: "level1"
             }
