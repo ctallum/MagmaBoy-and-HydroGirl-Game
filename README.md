@@ -31,6 +31,8 @@ python main.py
 in the terminal. Once you have done this, a screen will pop up showing you the menu and directions.
 
 ## Sources
-The only external sources used were:
+The only external sources used were: 
+
 The Fireboy and Watergirl games as a starting idea point.
+
 DaFluffyPotato pygame platformer tutorials as starting point to implement jumping physics and collisions.
