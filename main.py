@@ -62,7 +62,8 @@ def run_game(game, controller, level="level1"):
     if level == "level1":
 
         board = Board('data/level1.txt')
-        gates = Gates((285, 128), [(190,168), (390,168)])
+        gate = Gates((285, 128), [(190,168), (390,168)])
+        gates = [gate]
 
         fire_door = FireDoor((64, 48), (64, 48), (48, 16))
         water_door = WaterDoor((128, 48), (128, 48), (112, 16))
@@ -88,7 +89,8 @@ def run_game(game, controller, level="level1"):
         # draw features of level
         game.draw_level_background(board)
         game.draw_board(board)
-        game.draw_gates(gates)
+        if gates:
+            game.draw_gates(gates)
         game.draw_doors([fire_door, water_door])
 
         # draw player
