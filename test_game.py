@@ -84,23 +84,23 @@ def test_collision(player, tile, hit_list):
 
 
 # both doors closed
-fire_door = FireDoor((64, 48), (64, 48), (48, 16))
-water_door = WaterDoor((128, 48), (128, 48), (112, 16))
+fire_door = FireDoor((64, 48))
+water_door = WaterDoor((128, 48))
 
 # both doors open
-fire_door_both = FireDoor((16, 350), (16, 350), (0, 318))
+fire_door_both = FireDoor((16, 350))
 fire_door_both._door_open = True
-water_door_both = WaterDoor((16, 350), (16, 350), (0, 318))
+water_door_both = WaterDoor((16, 350))
 water_door_both._door_open = True
 
 # fire door open, water door closed
-fire_door_magma = FireDoor((16, 350), (16, 350), (0, 318))
+fire_door_magma = FireDoor((16, 350))
 fire_door_magma._door_open = True
-water_door_magma = WaterDoor((128, 48), (128, 48), (112, 16))
+water_door_magma = WaterDoor((128, 48))
 
 # water door open, fire door closed
-fire_door_hydro = FireDoor((64, 48), (64, 48), (48, 16))
-water_door_hydro = WaterDoor((16, 350), (16, 350), (0, 318))
+fire_door_hydro = FireDoor((64, 48))
+water_door_hydro = WaterDoor((16, 350))
 water_door_hydro._door_open = True
 
 level_done_cases = [
@@ -160,7 +160,7 @@ def test_movement(moving_right, moving_left, jumping,
     player.moving_left = moving_left
     player.jumping = jumping
 
-    Game.move_player(Game(), board, gates, [player])
+    Game.move_player(Game(), board, [gates], [player])
 
     assert (player.rect.x > init_x) == moved_right
     assert (player.rect.x < init_x) == moved_left
