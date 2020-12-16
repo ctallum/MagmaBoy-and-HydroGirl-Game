@@ -61,7 +61,9 @@ def run_game(game, controller, level="level1"):
     # load level data
     if level == "level1":
         board = Board('data/level1.txt')
-        gate = Gates((285, 128), [(190,168), (390,168)])
+        gate_location = (285, 128)
+        plate_locations = [(190,168), (390,168)]
+        gate = Gates(gate_location, plate_locations)
         gates = [gate]
 
         fire_door_location = (64, 48)
@@ -69,6 +71,11 @@ def run_game(game, controller, level="level1"):
         water_door_location = (128, 48)
         water_door = WaterDoor(water_door_location)
         doors = [fire_door, water_door]
+
+        magma_boy_location = (16, 336)
+        magma_boy = MagmaBoy(magma_boy_location)
+        hydro_girl_location = (35, 336)
+        hydro_girl = HydroGirl(hydro_girl_location)
 
     if level == "level2":
         board = Board('data/level2.txt')
@@ -80,9 +87,12 @@ def run_game(game, controller, level="level1"):
         water_door = WaterDoor(water_door_location)
         doors = [fire_door, water_door]
 
+        magma_boy_location = (16, 336)
+        magma_boy = MagmaBoy(magma_boy_location)
+        hydro_girl_location = (4835, 336)
+        hydro_girl = HydroGirl(hydro_girl_location)
+
     # initialize needed classes
-    hydro_girl = HydroGirl()
-    magma_boy = MagmaBoy()
 
     arrows_controller = ArrowsController()
     wasd_controller = WASDController()

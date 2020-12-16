@@ -3,8 +3,9 @@ import pygame
 from pygame.locals import *
 
 class Character:
-    def __init__(self):
-        self.rect = pygame.Rect(16, 350, self.image.get_width(), self.image.get_height())
+    def __init__(self, location):
+        _location = location
+        self.rect = pygame.Rect(location[0], location[1], self.image.get_width(), self.image.get_height())
         # motion
         self.moving_right = False
         self.moving_left = False
@@ -53,17 +54,17 @@ class Character:
 
 
 class MagmaBoy(Character):
-    def __init__(self):
+    def __init__(self, location):
         self.image = pygame.image.load('data/player_images/magmaboy.png')
         self.side_image = pygame.image.load('data/player_images/magmaboyside.png')
         self._type = "magma"
-        super().__init__()
+        super().__init__(location)
 
 
 class HydroGirl(Character):
-    def __init__(self):
+    def __init__(self, location):
         self.image = pygame.image.load('data/player_images/hydrogirl.png')
         self.side_image = pygame.image.load('data/player_images/hydrogirlside.png')
         self._type = "water"
-        super().__init__()
+        super().__init__(location)
 
