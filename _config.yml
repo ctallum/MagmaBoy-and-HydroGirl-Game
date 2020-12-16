@@ -1,6 +1,1 @@
 theme: jekyll-theme-tactile
-url: https://ctallum.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl: "" # the subpath of your site, e.g. "/blog"
-repository: "ctallum/softdes-game-project"
-title: "Magmaboy and Hydrogirl"
-theme: jekyll-theme-tactile
