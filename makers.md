@@ -1,5 +1,3 @@
-# Magmaboy and Hydrogirl
-
 - [Home](https://ctallum.github.io/softdes-game-project/)
 
 - [Get the Game](https://ctallum.github.io/softdes-game-project/installation.md)
