@@ -1,3 +1,6 @@
+from board import Board
+from gates import Gates
+from character import HydroGirl
 import pytest
 
 # import pygame and orther needed libraries
@@ -18,13 +21,13 @@ Collision unit tests
 # characters at start
 magma_boy = pygame.Rect(16, 350, 16, 32)
 hydro_girl = pygame.Rect(16, 350, 16, 32)
-#characters in goo
+# characters in goo
 magma_boy_goo = pygame.Rect(272, 80, 16, 32)
 hydro_girl_goo = pygame.Rect(272, 80, 16, 32)
-#characters in lava
+# characters in lava
 magma_boy_lava = pygame.Rect(19 * 16, 23 * 16, 16, 32)
 hydro_girl_lava = pygame.Rect(19 * 16, 23 * 16, 16, 32)
-#characters in water
+# characters in water
 magma_boy_water = pygame.Rect(11 * 16, 23 * 16, 16, 32)
 hydro_girl_water = pygame.Rect(11 * 16, 23 * 16, 16, 32)
 # characters at gates
@@ -86,6 +89,7 @@ collision_cases = [
 def test_collision(player, tile, hit_list):
     assert Game.collision_test(player, tile) == hit_list
 
+
 """
 Win Status unit tests
 """
@@ -127,6 +131,7 @@ level_done_cases = [
 def test_level_is_done(doors, win_status):
     assert Game.level_is_done(doors) == win_status
 
+
 """
 Motion unit tests
 """
@@ -144,9 +149,6 @@ motion_test_cases = [
     (False, True, True, False, True, True),
 ]
 
-from character import HydroGirl
-from gates import Gates
-from board import Board
 
 @pytest.mark.parametrize("moving_right, moving_left, jumping, \
                          moved_right, moved_left, jumped", motion_test_cases)
@@ -157,7 +159,7 @@ def test_movement(moving_right, moving_left, jumping,
     player_cords = (32, 336)
     player = HydroGirl(player_cords)
 
-    gates = Gates((285, 128), [(190,168), (390,168)])
+    gates = Gates((285, 128), [(190, 168), (390, 168)])
     board = Board('data/level1.txt')
 
     # inital locaton
@@ -174,5 +176,3 @@ def test_movement(moving_right, moving_left, jumping,
     assert (player.rect.x > init_x) == moved_right
     assert (player.rect.x < init_x) == moved_left
     assert (player.rect.y < init_y) == jumped
-
-
