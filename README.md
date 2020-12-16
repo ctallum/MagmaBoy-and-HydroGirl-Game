@@ -19,11 +19,19 @@ $ git clone https://github.com/ctallum/softdes-game-project.git
 ```
 
 Before installing MagmaBoy and HydroGirl make sure to have PyGame installed.
-  To install pygame in Linux run the following commands:
+  To install pygame in Linux run the command:
  ```
-  $ apt-get build-dep python-pygame
-  $ apt-get install mercurial python-dev python-numpy ffmpeg libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-ttf2.0-dev libsmpeg-dev libsdl1.2-dev libportmidi-dev libswscale-dev libavformat-dev libavcodec-dev
-  $ pip install pygame
+ python3 -m pip install -U pygame --user
+ ```
+ Alternativly, you can run the following to e
+ ```
+$ sudo apt-get update
+$ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev libfreetype6-dev python3-setuptools python3-dev python3 libportmidi-dev
+$ sudo apt-get build-dep libsdl2 libsdl2-image libsdl2-mixer libsdl2-ttf libfreetype6 python3 libportmidi0
+$ git clone https://github.com/pygame/pygame.git
+$ cd pygame
+$ python3 setup.py -config -auto -sdl2
+$ python3 setup.py install --user
  ```
 More in depth instilation instructions as well as guides to setting up pygame on Windows and MacOS can be found here:
 https://www.pygame.org/wiki/GettingStarted
