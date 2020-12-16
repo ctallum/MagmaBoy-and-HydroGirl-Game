@@ -48,7 +48,7 @@ class Game:
             self.draw_level_select_indicator(level_select, level_index)
             level_dict = {
                 0: "level1",
-                1: "level1",
+                1: "level2",
                 2: "level1",
                 3: "level1",
                 4: "level1"

@@ -42,17 +42,17 @@ class Doors:
     
 
 class FireDoor(Doors):
-    def __init__(self, door_location, background_location, frame_location):
+    def __init__(self, door_location):
         self.door_location = door_location
-        self.background_location = background_location
-        self.frame_location = frame_location
+        self.background_location = door_location
+        self.frame_location = (door_location[0] - 16, door_location[1] - 32 )
         self.door_image = pygame.image.load("data/door_images/fire_door.png")
         super().__init__()
 
 class WaterDoor(Doors):
-    def __init__(self, door_location, background_location, frame_location):
+    def __init__(self, door_location):
         self.door_location = door_location
-        self.background_location = background_location
-        self.frame_location = frame_location
+        self.background_location = door_location
+        self.frame_location = (door_location[0] - 16, door_location[1] - 32 )
         self.door_image = pygame.image.load("data/door_images/water_door.png")
         super().__init__()
