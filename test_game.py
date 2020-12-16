@@ -11,6 +11,10 @@ from doors import FireDoor, WaterDoor
 from controller import ArrowsController, WASDController, GeneralController
 from level_select import LevelSelect
 
+"""
+Collision unit tests
+"""
+
 # characters at start
 magma_boy = pygame.Rect(16, 350, 16, 32)
 hydro_girl = pygame.Rect(16, 350, 16, 32)
@@ -82,6 +86,9 @@ collision_cases = [
 def test_collision(player, tile, hit_list):
     assert Game.collision_test(player, tile) == hit_list
 
+"""
+Win Status unit tests
+"""
 
 # both doors closed
 fire_door = FireDoor((64, 48))
@@ -120,7 +127,9 @@ level_done_cases = [
 def test_level_is_done(doors, win_status):
     assert Game.level_is_done(doors) == win_status
 
-
+"""
+Motion unit tests
+"""
 
 motion_test_cases = [
     # player is moving right, player moved right
