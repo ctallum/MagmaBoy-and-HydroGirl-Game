@@ -1,8 +1,8 @@
 - [Home](https://ctallum.github.io/softdes-game-project/)
 
-- [Get the Game](https://ctallum.github.io/softdes-game-project/installation.md)
+- [Get the Game](installation.md)
 
-- [Our Inspiration and Sources](https://ctallum.github.io/softdes-game-project/sources.md)
+- [Our Inspiration and Sources](sources.md)
 
 ## The Makers
 
