@@ -10,7 +10,7 @@
 ![Chris](https://user-images.githubusercontent.com/25769132/102371442-301b5100-3f8c-11eb-95a3-c145a4c6ace7.png)
 
 ### Olivia Jo Bradley
-![OJ](https://user-images.githubusercontent.com/25769132/102371835-9b652300-3f8c-11eb-917b-f145da6447c3.png)
+![OJ](https://user-images.githubusercontent.com/25769132/102374449-5b536f80-3f8f-11eb-8a03-3d77ec25359f.png)
 
 ### Maya Sivanandan
 ![Maya](https://user-images.githubusercontent.com/25769132/102371997-c5b6e080-3f8c-11eb-9c66-01f970cbb9c8.jpg)
