@@ -96,15 +96,15 @@ def run_game(game, controller, level="level1"):
         board = Board('data/level3.txt')
         gates = []
 
-        fire_door_location = (390, 48)
+        fire_door_location = (5*16, 4*16)
         fire_door = FireDoor(fire_door_location)
-        water_door_location = (330, 48)
+        water_door_location = (28*16, 4*16)
         water_door = WaterDoor(water_door_location)
         doors = [fire_door, water_door]
 
-        magma_boy_location = (16, 336)
+        magma_boy_location = (28*16, 4*16)
         magma_boy = MagmaBoy(magma_boy_location)
-        hydro_girl_location = (4835, 336)
+        hydro_girl_location = (5*16, 4*16)
         hydro_girl = HydroGirl(hydro_girl_location)
 
     # initialize needed classes
