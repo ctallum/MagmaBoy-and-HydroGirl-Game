@@ -28,7 +28,7 @@ The usage of this game is really simple. Once the Installation procedure has bee
 ```
 python main.py
 ```
-in the terminal. Once you have done this, a screen will pop up showing you the menu and directions.
+in the terminal. Once you have done this, a screen will pop up showing you the menu and directions. Use the Arrow Keys to control Magmaboy, W A S D keys to control Hydrogirl. Use Enter to select things in the menu and move onto the next level and Escape to return to the menu.
 
 ## Sources
 The only external sources used were: 
