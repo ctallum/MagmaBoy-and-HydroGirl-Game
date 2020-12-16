@@ -13,8 +13,12 @@ Grab a friend, and together play as MagmaBoy and HydroGirl, two friends who are 
 But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons and the platforms to get to the doors, and into the next room. 
 
 ## Installation
+To download the game, clone the game repository.
+```
+$ git clone https://github.com/ctallum/softdes-game-project.git
+```
 
-When installing MagmaBoy and HydroGirl make sure to have PyGame installed.
+Before installing MagmaBoy and HydroGirl make sure to have PyGame installed.
   To install pygame in Linux run the following commands:
  ```
   $ apt-get build-dep python-pygame
@@ -24,13 +28,13 @@ When installing MagmaBoy and HydroGirl make sure to have PyGame installed.
  
 ## Usage
 
-The usage of this game is really simple. Once the Installation procedure has been done, just go to the folder where `main.py` is in your computer and run
+Running the game is really simple. Once the Installation procedure is complete, just go to the game directory and run
 ```
 python main.py
 ```
 in the terminal.
 
-Once you have done this, a screen will pop up showing you the menu and directions. Use the Arrow Keys to control Magmaboy, W A S D keys to control Hydrogirl. Use Enter to select things in the menu and move onto the next level and Escape to return to the menu.
+Once the game is running, a screen will pop up showing you the menu and directions. Use the Arrow Keys to control Magmaboy, W A S D keys to control Hydrogirl. Once you are in the level, pressing Escape at any time will return the user to the level select screen.
 
 ## Sources
 The only external sources used were: 
