@@ -1,7 +1,7 @@
-#The Makers
+# The Makers
 
-##Chris Allum
+## Chris Allum
 
-##Olivia Jo Bradley
+## Olivia Jo Bradley
 
-##Maya Sivanandan
+## Maya Sivanandan
