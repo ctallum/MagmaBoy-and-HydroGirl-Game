@@ -1,7 +1,9 @@
-# The Makers
+# Magmaboy and Hydrogirl
 
-## Chris Allum
+## The Makers
 
-## Olivia Jo Bradley
+### Chris Allum
 
-## Maya Sivanandan
+### Olivia Jo Bradley
+
+### Maya Sivanandan
