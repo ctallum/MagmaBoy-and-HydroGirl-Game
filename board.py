@@ -10,8 +10,8 @@ class Board:
             path::str
                 A path to a text file containing block placements
         """
-        level = path
-        self.load_map(level)
+        self.CHUNK_SIZE = 16
+        self.load_map(path)
         self.load_images()
         self.make_solid_blocks()
         self.make_water_pools()
@@ -51,6 +51,7 @@ class Board:
         folder "data/board_textures and save textures in a dictionary.
         """
         self._background = pygame.image.load('data/board_textures/wall.png')
+        # create dictionary that maps a string to a board texture
         self._board_textures = {
             "100": pygame.image.load('data/board_textures/100.png'),
             "100": pygame.image.load('data/board_textures/100.png'),
@@ -66,6 +67,7 @@ class Board:
             "3": pygame.image.load('data/board_textures/water.png'),
             "4": pygame.image.load('data/board_textures/goo.png')
         }
+        # set the colorkey for each image in dictionary
         for texture in self._board_textures.keys():
             self._board_textures[texture].set_colorkey((255, 0, 255))
 
@@ -86,12 +88,17 @@ class Board:
         Iterate through the map and make the walls and ground solid blocks
         which the player can collide with.
         """
+        # create empty list to contain solid block rects
+        CHUNKS_SIZE = 16
         self._solid_blocks = []
         for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
+                # if block is not air or a liquid
                 if tile not in ['0', '2', '3', '4']:
+                    # create a 16 x 16 rect and add it to the list
                     self._solid_blocks.append(
-                        pygame.Rect(x * 16, y * 16, 16, 16))
+                        pygame.Rect(x * self.CHUNK_SIZE, y * self.CHUNK_SIZE,
+                                    self.CHUNK_SIZE, self.CHUNK_SIZE))
 
     def get_solid_blocks(self):
         """
@@ -103,12 +110,17 @@ class Board:
         """
         Create list containing lava pool rects
         """
+        # create an empty list to store lava pool rects
         self._lava_pools = []
         for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
+                # if number in game map represents lava
                 if tile == "2":
+                    # add a 16x8 rect to the list
                     self._lava_pools.append(
-                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+                        pygame.Rect(x * self.CHUNK_SIZE, y * self.CHUNK_SIZE
+                                    + self.CHUNK_SIZE / 2, self.CHUNK_SIZE,
+                                    self.CHUNK_SIZE / 2))
 
     def get_lava_pools(self):
         """
@@ -120,12 +132,17 @@ class Board:
         """
         Create list containing water pool rects
         """
+        # Create empty list to store water pool rects
         self._water_pools = []
         for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
+                # if number in game map represents water
                 if tile == "3":
+                    # add a 16x8 rect to the list
                     self._water_pools.append(
-                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+                        pygame.Rect(x * self.CHUNK_SIZE, y * self.CHUNK_SIZE
+                                    + self.CHUNK_SIZE / 2, self.CHUNK_SIZE,
+                                    self.CHUNK_SIZE / 2))
 
     def get_water_pools(self):
         """
@@ -137,12 +154,17 @@ class Board:
         """
         Create list containing goo pool rects
         """
+        # create an empty list to store goo rects
         self._goo_pools = []
         for y, row in enumerate(self._game_map):
             for x, tile in enumerate(row):
+                # if number in game map represents goo
                 if tile == "4":
+                    # add a 16x8 rect to the list
                     self._goo_pools.append(
-                        pygame.Rect(x * 16, y * 16 + 8, 16, 8))
+                        pygame.Rect(x * self.CHUNK_SIZE, y * self.CHUNK_SIZE
+                                    + self.CHUNK_SIZE / 2, self.CHUNK_SIZE,
+                                    self.CHUNK_SIZE / 2))
 
     def get_goo_pools(self):
         """

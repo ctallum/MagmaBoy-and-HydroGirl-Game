@@ -62,7 +62,7 @@ class Character:
         """
         Return a boolean that indicates if the player is alive or dead
         """
-        return self._alive == False
+        return self._alive is False
 
     def get_type(self):
         """
