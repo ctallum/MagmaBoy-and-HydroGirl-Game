@@ -1,3 +1,5 @@
+- Home
+
 - [Get the Game](installation.md)
 
 - [Our Inspiration and Sources](sources.md)
