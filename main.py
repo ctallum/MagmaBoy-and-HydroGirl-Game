@@ -16,11 +16,13 @@ from gates import Gates
 from doors import FireDoor, WaterDoor
 from level_select import LevelSelect
 
+
 def main():
     pygame.init()
     controller = GeneralController()
     game = Game()
     show_intro_screen(game, controller)
+
 
 def show_intro_screen(game, controller):
     intro_screen = pygame.image.load('data/screens/intro_screen.png')
@@ -30,10 +32,12 @@ def show_intro_screen(game, controller):
         if controller.press_key(pygame.event.get(), K_RETURN):
             show_level_screen(game, controller)
 
+
 def show_level_screen(game, controller):
     level_select = LevelSelect()
     level = game.user_select_level(level_select, controller)
     run_game(game, controller, level)
+
 
 def show_win_screen(game, controller):
     win_screen = pygame.image.load('data/screens/win_screen.png')
@@ -44,6 +48,7 @@ def show_win_screen(game, controller):
         game.refresh_window()
         if controller.press_key(pygame.event.get(), K_RETURN):
             show_level_screen(game, controller)
+
 
 def show_death_screen(game, controller, level):
     death_screen = pygame.image.load('data/screens/death_screen.png')
@@ -57,12 +62,13 @@ def show_death_screen(game, controller, level):
         if controller.press_key(events, K_ESCAPE):
             show_level_screen(game, controller)
 
-def run_game(game, controller, level="level1"): 
+
+def run_game(game, controller, level="level1"):
     # load level data
     if level == "level1":
         board = Board('data/level1.txt')
         gate_location = (285, 128)
-        plate_locations = [(190,168), (390,168)]
+        plate_locations = [(190, 168), (390, 168)]
         gate = Gates(gate_location, plate_locations)
         gates = [gate]
 
@@ -96,15 +102,15 @@ def run_game(game, controller, level="level1"):
         board = Board('data/level3.txt')
         gates = []
 
-        fire_door_location = (5*16, 4*16)
+        fire_door_location = (5 * 16, 4 * 16)
         fire_door = FireDoor(fire_door_location)
-        water_door_location = (28*16, 4*16)
+        water_door_location = (28 * 16, 4 * 16)
         water_door = WaterDoor(water_door_location)
         doors = [fire_door, water_door]
 
-        magma_boy_location = (28*16, 4*16)
+        magma_boy_location = (28 * 16, 4 * 16)
         magma_boy = MagmaBoy(magma_boy_location)
-        hydro_girl_location = (5*16, 4*16)
+        hydro_girl_location = (5 * 16, 4 * 16)
         hydro_girl = HydroGirl(hydro_girl_location)
 
     # initialize needed classes
@@ -156,7 +162,7 @@ def run_game(game, controller, level="level1"):
 
         if controller.press_key(events, K_ESCAPE):
             show_level_screen(game, controller)
-        
+
         # close window is player clicks on [x]
         for event in events:
             if event.type == QUIT:
