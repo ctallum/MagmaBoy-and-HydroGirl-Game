@@ -9,7 +9,7 @@
 https://ctallum.github.io/softdes-game-project/
 
 ## Description
-Grab a friend, and together play as MagmaBoy and HydroGirl, two friends who are exploring and abandoned temple.
+Grab a friend, and together play as MagmaBoy and HydroGirl, two friends who are exploring an abandoned temple.
 But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons and the platforms to get to the final doors and into the next room. 
 
 ## Installation
