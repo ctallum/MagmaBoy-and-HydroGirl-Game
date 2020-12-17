@@ -14,6 +14,7 @@ Our game was heavily inspired and based on the game Fireboy and Watergirl (which
 
 We used the [pygame library](https://www.pygame.org/news) and various pygame tutorials to help us with our project
  - [Platformers in pygame](https://coderslegacy.com/python/pygame-platformer-game-development/)
+ - Tutorials by DaFluffyPotato [[1]](https://www.youtube.com/watch?v=xxRhvyZXd8I&list=PLX5fBCkxJmm3nAalPU6gGfRIFLlghRuYy) [[2]](https://www.youtube.com/watch?v=Qdeb1iinNtk&list=PLX5fBCkxJmm3nAalPU6gGfRIFLlghRuYy&index=2) [[3]](https://www.youtube.com/watch?v=abH2MSBdnWc&list=PLX5fBCkxJmm3nAalPU6gGfRIFLlghRuYy&index=3)
 
 ### Pixilart
 We used [Pixilart](https://www.pixilart.com/) to make the graphics for our game.
