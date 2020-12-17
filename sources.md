@@ -22,5 +22,5 @@ We used the [pygame library](https://www.pygame.org/news) and various pygame tut
 We used [Pixilart](https://www.pixilart.com/) to make the graphics for our game.
 
 <p align="center">
-<img src="https://art.pixilart.com/2a21e42e347fcbf.png" width="100"> <img src="https://art.pixilart.com/08bb79a252132b6.png"  width="100">
+<img src="https://art.pixilart.com/86caddbd1985202.png" width="100"> <img src="https://art.pixilart.com/34418d131cc023a.png"  width="100">
 </p>
