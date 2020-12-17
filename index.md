@@ -28,6 +28,13 @@ The main goal of our project was to recreate one of our favorite childhood games
 
 - Gain experience making sprites and graphics
 
+### Our Levels
+Right now, we have programed in three unique levels.
+
+| **Level 1** | **Level 2** | **Level 3** |
+| :----: | :----: | :----: |
+| <img src="images/level1.png" width="300"> | <img src="images/level2.png" width="300"> | <img src="images/level3.png" width="300"> |
+
 ### Gameplay
 #### Full Run
 <img src="https://user-images.githubusercontent.com/28941311/102445948-ad7daa80-3ffa-11eb-9aa9-4e12f11481c6.gif" width="400">
