@@ -1,6 +1,3 @@
-<head>
-  <link rel="icon" href="flavicon.png" type="image/x-icon" />
-</head>
 
 - Home
 
