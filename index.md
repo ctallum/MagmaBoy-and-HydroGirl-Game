@@ -1,3 +1,6 @@
+<head>
+  <link rel="icon" href="flavicon.png" type="image/x-icon" />
+</head>
 - Home
 
 - [Get the Game](installation.md)
