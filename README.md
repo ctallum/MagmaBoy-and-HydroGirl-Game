@@ -9,8 +9,7 @@
 https://ctallum.github.io/softdes-game-project/
 
 ## Description
-Grab a friend, and together play as MagmaBoy and HydroGirl, two friends who are exploring an abandoned temple.
-But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons and the platforms to get to the final doors and into the next room. 
+Grab a friend and together play as MagmaBoy and HydroGirl, two friends exploring an abandoned temple. But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons, platforms, and collaboration to get to the final doors and into the next room.
 
 ## Installation
 To download the game, first clone this game repository.
@@ -42,7 +41,7 @@ Running the game is really simple. Once the installation procedure is complete, 
 python main.py
 ```
 
-Once the game is running, a screen will pop up, showing you the menu and directions. Use the arrow keys to control Magmaboy and WASD keys to control Hydrogirl. While in the level, you can press the escape key at any time to return to the level select screen.
+Once the game is running, a screen will pop up, showing you the menu and directions. Use the arrow keys to control MagmaBoy and WASD keys to control HydroGirl. While in the level, you can press the escape key at any time to return to the level select screen.
 
 ## Sources
 The only external sources used were: 
