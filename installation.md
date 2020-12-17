@@ -1,5 +1,7 @@
 - [Home](https://ctallum.github.io/softdes-game-project)
 
+- Get the Game
+
 - [Our Inspiration and Sources](sources.md)
 
 - [Meet the Makers](makers.md)
