@@ -30,7 +30,7 @@ The main goal of our project was to recreate one of our favorite childhood games
 
 ### Gameplay
 #### Full Run
-<img src="https://user-images.githubusercontent.com/28941311/102443775-896b9a80-3ff5-11eb-9ab7-43819a6f8dd1.gif" width="400">
+<img src="https://user-images.githubusercontent.com/28941311/102445948-ad7daa80-3ffa-11eb-9aa9-4e12f11481c6.gif" width="400">
 
 #### Level Selection
 You can select which level you want to play in the level selection screen.
