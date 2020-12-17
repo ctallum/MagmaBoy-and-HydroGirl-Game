@@ -2,6 +2,8 @@
 
 - [Get the Game](installation.md)
 
+- Our Inspiration and Sources
+
 - [Meet the Makers](makers.md)
 
 ## Our Inspiration and Sources
@@ -18,3 +20,7 @@ We used the [pygame library](https://www.pygame.org/news) and various pygame tut
 
 ### Pixilart
 We used [Pixilart](https://www.pixilart.com/) to make the graphics for our game.
+
+<p align="center">
+<img src="https://art.pixilart.com/2a21e42e347fcbf.png" width="100"> <img src="https://art.pixilart.com/08bb79a252132b6.png"  width="100">
+</p>
