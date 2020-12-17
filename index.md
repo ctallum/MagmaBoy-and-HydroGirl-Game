@@ -1,6 +1,8 @@
-<head>
+<html>
+	<head>
 		<link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
-</head>
+	</head>
+</html>
 
 - Home
 
@@ -11,41 +13,19 @@
 - [Meet the Makers](makers.md)
 
 
-## Magmaboy and Hydrogirl
 
+Welcome to MagmaBoy and HydroGirl, a two-player platforming game inspired by Fireboy and Watergirl! Grab a friend and together play as MagmaBoy and HydroGirl, two friends exploring an abandoned temple. But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons, platforms, and collaboration to get to the final doors and into the next room.
 
-You can use the [editor on GitHub](https://github.com/ctallum/softdes-game-project/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+### Goals of our Project
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The main goal of our project was to recreate one of our favorite childhood games (Fireboy and Watergirl) in pygame. This meant we had the following subgoals in order to achieve our final product.
 
-### Markdown
+- Implement two players
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+- Implement physics (jumping, collisions, death)
 
-```markdown
-Syntax highlighted code block
+- Use classes and an MCV architecture to organize our code
 
-# Header 1
-## Header 2
-### Header 3
+- Gain experience making sprites and graphics
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/ctallum/softdes-game-project/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+### Gameplay
