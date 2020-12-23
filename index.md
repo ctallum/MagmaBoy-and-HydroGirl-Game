@@ -5,8 +5,10 @@
 </html>
 
  
-| Home | [Get the Game](installation.md) | [Our Inspiration and Sources](sources.md) | [Meet the Makers](makers.md) |
-|:---:|:---:|:---:|:---:|
+- Home
+- [Get the Game](installation.md)
+- [Our Inspiration and Sources](sources.md)
+- [Meet the Makers](makers.md)
 
 
 Welcome to MagmaBoy and HydroGirl, a two-player platforming game inspired by Fireboy and Watergirl! Grab a friend and together play as MagmaBoy and HydroGirl, two friends exploring an abandoned temple. But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons, platforms, and collaboration to get to the final doors and into the next room.
