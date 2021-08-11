@@ -1,4 +1,4 @@
-- [Home](https://ctallum.github.io/softdes-game-project/)
+- [Home](https://ctallum.github.io/MagmaBoy-and-HydroGirl-Game/)
 
 - [Get the Game](installation.md)
 
