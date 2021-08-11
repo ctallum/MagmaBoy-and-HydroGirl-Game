@@ -6,7 +6,7 @@
 </p>
 
 ## Website
-https://ctallum.github.io/softdes-game-project/
+https://ctallum.github.io/MagmaBoy-and-HydroGirl-Game/
 
 ## Description
 Grab a friend and together play as MagmaBoy and HydroGirl, two friends exploring an abandoned temple. But be careful! MagmaBoy can't touch the water puddles, HydroGirl can't touch the lava pools, and neither of them can touch the green goo pools or the level will end! Use the buttons, platforms, and collaboration to get to the final doors and into the next room.
