@@ -4,7 +4,7 @@
 
 - [Our Inspiration and Sources](sources.md)
 
-- The Makers
+- Meet the Makers
 
 ## The Makers
 
